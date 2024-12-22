@@ -1,4 +1,4 @@
-import { DayNameType } from "@/store/FormStore";
+import { DayNameType } from "./days";
 
 export type Task = {
     id: number;

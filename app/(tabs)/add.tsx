@@ -1,5 +1,4 @@
 import { router } from "expo-router";
-import { useCallback } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 
 import DaySelect from "@/components/form/DaySelect";

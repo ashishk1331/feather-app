@@ -1,17 +1,7 @@
 import { create } from "zustand";
 
-export const DayNames = [
-    "all",
-    "mon",
-    "tue",
-    "wed",
-    "thr",
-    "fri",
-    "sat",
-    "sun",
-] as const;
-
-export type DayNameType = (typeof DayNames)[number];
+import { DayNames } from "@/constants/Days";
+import { type DayNameType } from "@/types/days";
 
 interface FormState {
     prompt: string;
@@ -77,3 +67,4 @@ export const useFormStore = create<FormState & FormActions>()((set) => ({
         return set(initialState);
     },
 }));
+export { DayNameType };

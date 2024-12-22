@@ -1,4 +1,4 @@
-import { DayNameType } from "@/store/FormStore";
+import { DayNameType } from "@/types/days";
 import { Task } from "@/types/task";
 
 export function generateTask(prompt: string, days: DayNameType[]): Task {

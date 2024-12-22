@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
-import { DayNameType, DayNames } from "@/store/FormStore";
+import { DayNames } from "@/constants/Days";
+import { DayNameType } from "@/types/days";
 
 import Flex from "../layout/Flex";
 import Button from "../primitives/Button";
