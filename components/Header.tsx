@@ -1,4 +1,6 @@
 import { format } from "date-fns";
+import { MotiText } from "moti";
+import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
 import { useTaskStore } from "@/store/TaskStore";
@@ -20,6 +22,9 @@ export default function Header() {
     const today = format(new Date(), "d MMM");
     const dayName = format(new Date(), "EEEE");
 
+    const headlines = ["Feather", dayName, "Good vibes only"];
+    const [headlineIndex, setHeadlineIndex] = useState<number>(0);
+
     let prompt = "";
     if (finishedTasksCount === 0) {
         prompt = "Yet to start";
@@ -28,6 +33,15 @@ export default function Header() {
     } else {
         prompt = `${finishedTasksCount} Done`;
     }
+
+    useEffect(() => {
+        let timer: ReturnType<typeof setInterval>;
+        timer = setInterval(() => {
+            setHeadlineIndex((prev) => (prev + 1) % headlines.length);
+        }, 10 * 1000);
+
+        return () => clearInterval(timer);
+    }, []);
 
     return (
         <Flex
@@ -45,7 +59,17 @@ export default function Header() {
                     <Button variant="icon">
                         <FontAwesome name="circle" size={24} color="#865dff" />
                     </Button>
-                    <Text variant="title">{dayName}</Text>
+                    <MotiText
+                        key={headlines[headlineIndex]}
+                        from={{ opacity: 0, translateY: -12 }}
+                        animate={{ opacity: 1, translateY: 0 }}
+                        transition={{
+                            type: "timing",
+                        }}
+                        style={{ fontSize: 24, fontWeight: "bold" }}
+                    >
+                        {headlines[headlineIndex]}
+                    </MotiText>
                 </Flex>
                 <Flex
                     flexDirection="row"
@@ -55,7 +79,16 @@ export default function Header() {
                 >
                     <Text>{today}</Text>
                     <Progress widthPercentage={percentageComplete} />
-                    <Text>{prompt}</Text>
+                    <MotiText
+                        key={prompt}
+                        from={{ opacity: 0, translateY: -12 }}
+                        animate={{ opacity: 1, translateY: 0 }}
+                        transition={{
+                            type: "timing",
+                        }}
+                    >
+                        {prompt}
+                    </MotiText>
                 </Flex>
             </Flex>
             <Button variant="icon">
