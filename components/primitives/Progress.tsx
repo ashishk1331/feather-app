@@ -1,4 +1,5 @@
-import { StyleSheet, View } from "react-native";
+import { MotiView } from "moti";
+import { StyleSheet } from "react-native";
 
 import Flex from "../layout/Flex";
 
@@ -15,12 +16,14 @@ export default function Progress({ widthPercentage = 0 }: ProgressProps) {
             justifyContent="flex-start"
             style={[styles.pill, styles.outerPill]}
         >
-            <View
-                style={[
-                    styles.pill,
-                    styles.innerPill,
-                    { width: widthPercentage * 64 },
-                ]}
+            <MotiView
+                from={{ width: 0 }}
+                animate={{ width: widthPercentage * 64 }}
+                transition={{
+                    type: "timing",
+                    duration: 350,
+                }}
+                style={[styles.pill, styles.innerPill]}
             />
         </Flex>
     );

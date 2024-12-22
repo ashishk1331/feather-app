@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { StyleSheet } from "react-native";
 
 import { useTaskStore } from "@/store/TaskStore";
 
@@ -29,8 +30,12 @@ export default function Header() {
     }
 
     return (
-        <Flex flexDirection="row" justifyContent="space-between">
-            <Flex flexDirection="column" gap={6}>
+        <Flex
+            flexDirection="row"
+            justifyContent="space-between"
+            style={styles.outer}
+        >
+            <Flex flexDirection="column" gap={12}>
                 <Flex
                     flexDirection="row"
                     alignItems="center"
@@ -59,3 +64,9 @@ export default function Header() {
         </Flex>
     );
 }
+
+const styles = StyleSheet.create({
+    outer: {
+        marginVertical: 12,
+    },
+});

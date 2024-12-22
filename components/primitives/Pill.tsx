@@ -12,6 +12,7 @@ export default function Pill({ text }: PillProps) {
 
 const styles = StyleSheet.create({
     pill: {
+        fontSize: 12,
         paddingHorizontal: 12,
         paddingVertical: 4,
         borderRadius: 12,
