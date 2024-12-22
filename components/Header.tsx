@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
 import { useTaskStore } from "@/store/TaskStore";
+import { fetchNextHeadline } from "@/util/greeting";
 
+import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 import Flex from "./layout/Flex";
 import Button from "./primitives/Button";
@@ -20,10 +21,9 @@ export default function Header() {
     const percentageComplete = finishedTasksCount / tasks.length;
 
     const today = format(new Date(), "d MMM");
-    const dayName = format(new Date(), "EEEE");
 
-    const headlines = ["Feather", dayName, "Good vibes only"];
-    const [headlineIndex, setHeadlineIndex] = useState<number>(0);
+    const nextHeadline = fetchNextHeadline();
+    const [headline, setHeadline] = useState(nextHeadline.next().value);
 
     let prompt = "";
     if (finishedTasksCount === 0) {
@@ -37,7 +37,7 @@ export default function Header() {
     useEffect(() => {
         let timer: ReturnType<typeof setInterval>;
         timer = setInterval(() => {
-            setHeadlineIndex((prev) => (prev + 1) % headlines.length);
+            setHeadline(nextHeadline.next().value);
         }, 10 * 1000);
 
         return () => clearInterval(timer);
@@ -60,7 +60,7 @@ export default function Header() {
                         <FontAwesome name="circle" size={24} color="#865dff" />
                     </Button>
                     <MotiText
-                        key={headlines[headlineIndex]}
+                        key={headline}
                         from={{ opacity: 0, translateY: -12 }}
                         animate={{ opacity: 1, translateY: 0 }}
                         transition={{
@@ -68,7 +68,7 @@ export default function Header() {
                         }}
                         style={{ fontSize: 24, fontWeight: "bold" }}
                     >
-                        {headlines[headlineIndex]}
+                        {headline}
                     </MotiText>
                 </Flex>
                 <Flex
@@ -92,7 +92,7 @@ export default function Header() {
                 </Flex>
             </Flex>
             <Button variant="icon">
-                <MaterialIcons name="wallet" size={24} color="#020617" />
+                <Feather name="folder" size={24} color="#020617" />
             </Button>
         </Flex>
     );
