@@ -1,12 +1,17 @@
 import { PropsWithChildren } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleProp, StyleSheet, ViewStyle } from "react-native";
 
-export default function Container(props: PropsWithChildren) {
+type ContainerProps = {
+    style?: StyleProp<ViewStyle>;
+} & PropsWithChildren;
+
+export default function Container(props: ContainerProps) {
     return <ScrollView style={styles.container}>{props.children}</ScrollView>;
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         padding: 12,
     },
 });

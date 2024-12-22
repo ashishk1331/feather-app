@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     caption: {
         fontSize: 12,
-        fontWeight: "300",
+        fontWeight: "normal",
     },
 });
 

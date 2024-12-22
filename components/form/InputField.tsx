@@ -1,0 +1,49 @@
+import { StyleSheet, TextInput } from "react-native";
+
+import Flex from "../layout/Flex";
+import Text from "../primitives/Text";
+
+type InputFieldProps = {
+    value: string;
+    onChangeText(prompt: string): void;
+    label: string;
+    placeholder?: string;
+    followup?: string;
+};
+
+export default function InputField({
+    value,
+    onChangeText,
+    label,
+    placeholder = "",
+    followup = "",
+}: InputFieldProps) {
+    return (
+        <Flex flex={1} flexDirection="column" gap={10}>
+            <Text>{label}</Text>
+            <TextInput
+                cursorColor="#000"
+                style={styles.inputbox}
+                value={value}
+                onChangeText={onChangeText}
+                placeholder={placeholder}
+            />
+            {followup && (
+                <Text style={{ color: "#a3a3a3" }} variant="caption">
+                    {followup}
+                </Text>
+            )}
+        </Flex>
+    );
+}
+
+const styles = StyleSheet.create({
+    inputbox: {
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderWidth: 1,
+        borderColor: "#d4d4d4",
+        borderRadius: 12,
+        fontSize: 16,
+    },
+});

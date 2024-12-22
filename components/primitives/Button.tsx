@@ -12,7 +12,7 @@ import Text from "./Text";
 type ButtonProps = {
     title?: string;
     onPress?: () => void;
-    variant: "icon" | "ghost" | "primary" | "secondary";
+    variant: "icon" | "ghost" | "primary" | "secondary" | "outline";
     color?: string; // Button color
     textColor?: string; // Text color
     style?: StyleProp<ViewStyle>; // Custom styles for the button
@@ -36,15 +36,21 @@ const Button: React.FC<ButtonProps & PropsWithChildren> = ({
             onPress={onPress}
             style={[
                 styles.button,
-                styles[variant],
                 { backgroundColor: disabled ? "#ddd" : color },
+                styles[variant],
                 style,
             ]}
             disabled={disabled}
         >
             {children}
             {title && (
-                <Text style={[styles.text, { color: textColor }, textStyle]}>
+                <Text
+                    style={[
+                        styles.text,
+                        { color: variant === "primary" ? "#fff" : textColor },
+                        textStyle,
+                    ]}
+                >
                     {title}
                 </Text>
             )}
@@ -59,6 +65,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     primary: {
+        backgroundColor: "#865dff",
         paddingVertical: 12,
         paddingHorizontal: 20,
     },
@@ -69,6 +76,10 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         fontWeight: "bold",
+    },
+    outline: {
+        borderWidth: 1,
+        borderColor: "#000",
     },
 });
 

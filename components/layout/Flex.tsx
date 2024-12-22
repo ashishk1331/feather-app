@@ -9,6 +9,7 @@ type FlexProps = {
     alignSelf?: ViewStyle["alignSelf"];
     gap?: number;
     style?: StyleProp<ViewStyle>;
+    bg?: string;
     children?: React.ReactNode;
 };
 
@@ -20,12 +21,14 @@ const Flex: React.FC<FlexProps> = ({
     alignSelf,
     gap,
     style,
+    bg = "",
     children,
 }) => {
     return (
         <View
             style={[
                 {
+                    backgroundColor: bg,
                     flex,
                     flexDirection,
                     justifyContent,

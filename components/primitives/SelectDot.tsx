@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 import { useTaskStore } from "@/store/TaskStore";
 
@@ -25,7 +25,7 @@ export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
     }
 
     return (
-        <TouchableOpacity
+        <Pressable
             style={[isSelected ? styles.lesspadding : styles.morepadding]}
             onPress={() => toggleSelectedStatus(id)}
         >
@@ -35,7 +35,7 @@ export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
                     isSelected ? styles.selected : styles.deselected,
                 ]}
             />
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 
