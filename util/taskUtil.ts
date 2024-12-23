@@ -1,15 +1,24 @@
 import { format } from "date-fns";
+import * as Crypto from "expo-crypto";
 
 import { DayNameType } from "@/types/days";
 import { Task } from "@/types/task";
 
 export function generateTask(prompt: string, days: DayNameType[]): Task {
+    const UUID = Crypto.randomUUID();
     const daysOfWork = days.includes("all") ? "all" : days;
+    const createdAt = new Date().toJSON();
     return {
-        id: Math.random() * 10000 + 1,
+        id: UUID,
+        createdAt,
+        updatedAt: createdAt,
         title: prompt,
+        liked: false,
+        type: "task",
+        tags: [],
         days: daysOfWork,
         due_date: new Date().toJSON(),
+        priority: "low",
     };
 }
 
