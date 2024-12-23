@@ -7,8 +7,8 @@ import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
 import { fetchNextHeadline } from "@/util/greeting";
 
-import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import Flex from "./layout/Flex";
 import Button from "./primitives/Button";
@@ -17,7 +17,11 @@ import Text from "./primitives/Text";
 
 export default function Header() {
     const { primary: primaryColor, text: textColor } = useTheme();
+
+    const viewAll = useConfigStore((state) => state.viewAll);
+    const toggleViewAll = useConfigStore((state) => state.toggleViewAll);
     const toggleDarkMode = useConfigStore((state) => state.toggleDarkMode);
+
     const finishedList = useTaskStore((state) => state.finished);
     const tasks = useTaskStore((state) => state.tasks);
     const finishedTasksCount = finishedList.size;
@@ -87,8 +91,12 @@ export default function Header() {
                     </Text>
                 </Flex>
             </Flex>
-            <Button variant="icon">
-                <Feather name="folder" size={24} color={textColor} />
+            <Button variant="icon" onPress={toggleViewAll}>
+                <FontAwesome6
+                    name={viewAll ? "folder-open" : "folder-closed"}
+                    size={24}
+                    color={viewAll ? primaryColor : textColor}
+                />
             </Button>
         </Flex>
     );

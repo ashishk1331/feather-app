@@ -2,12 +2,22 @@ import { create } from "zustand";
 
 interface AppState {
     darkMode: boolean;
-    toggleDarkMode(): void;
+    viewAll: boolean;
 }
 
-export const useConfigStore = create<AppState>()((set) => ({
+interface AppActions {
+    toggleDarkMode(): void;
+    toggleViewAll(): void;
+}
+
+export const useConfigStore = create<AppState & AppActions>()((set) => ({
     darkMode: false,
     toggleDarkMode() {
         return set((prev) => ({ darkMode: !prev.darkMode }));
+    },
+
+    viewAll: false,
+    toggleViewAll() {
+        return set((prev) => ({ viewAll: !prev.viewAll }));
     },
 }));

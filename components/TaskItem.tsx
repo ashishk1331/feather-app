@@ -3,6 +3,7 @@ import { MotiView } from "moti";
 import { StyleSheet } from "react-native";
 
 import { useTheme } from "@/hooks/useTheme";
+import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
 import { Task } from "@/types/task";
 
@@ -19,6 +20,8 @@ type TaskItemProps = {
 
 export default function TaskItem({ index = 0, task }: TaskItemProps) {
     const { text: color } = useTheme();
+
+    const viewAll = useConfigStore((state) => state.viewAll);
 
     const finishedList = useTaskStore((state) => state.finished);
     const finished = finishedList.has(task.id);
@@ -44,9 +47,9 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                 alignItems="center"
                 gap={12}
             >
-                <Checkbox id={task.id} isFinished={finished} />
+                {!viewAll && <Checkbox id={task.id} isFinished={finished} />}
                 <Flex
-                    style={{ width: "60%" }}
+                    style={{ width: viewAll ? "84%" : "60%" }}
                     flexDirection="column"
                     alignItems="flex-start"
                     gap={8}
@@ -63,7 +66,22 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                     >
                         {task.title}
                     </Text>
-                    <Pill text={format(new Date(task.due_date), "d MMM")} />
+                    <Flex
+                        flexDirection="row"
+                        alignItems="center"
+                        gap={6}
+                        style={{ flexWrap: "wrap" }}
+                    >
+                        <Pill text={format(new Date(task.due_date), "d MMM")} />
+                        {viewAll &&
+                            (task.days === "all" ? (
+                                <Pill text="every day" />
+                            ) : (
+                                task.days.map((day, index) => (
+                                    <Pill key={index} text={day} />
+                                ))
+                            ))}
+                    </Flex>
                 </Flex>
                 <SelectDot id={task.id} isSelected={isSelected} />
             </Flex>
