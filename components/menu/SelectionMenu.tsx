@@ -1,0 +1,107 @@
+import { router, usePathname } from "expo-router";
+import React from "react";
+import { StyleSheet } from "react-native";
+
+import { useTheme } from "@/hooks/useTheme";
+import { useTaskStore } from "@/store/TaskStore";
+
+import AntDesign from "@expo/vector-icons/AntDesign";
+
+import Flex from "../layout/Flex";
+import Button from "../primitives/Button";
+
+export default function SelectionMenu() {
+    const { primary, warning } = useTheme();
+    const selectedTasks = useTaskStore((state) => state.selected);
+    const anySelectedTasks = selectedTasks.size > 0;
+
+    const pathname = usePathname();
+    const isAtHomePage = pathname === "/";
+
+    function resetSelectedTasks() {
+        useTaskStore.setState({
+            selected: new Set(),
+        });
+    }
+
+    function deleteSelectedTasks() {
+        useTaskStore.setState((prev) => ({
+            tasks: prev.tasks.filter((task) => !selectedTasks.has(task.id)),
+            selected: new Set(),
+        }));
+    }
+
+    function jumpToAddForm() {
+        router.push("/add");
+    }
+
+    return (
+        isAtHomePage && (
+            <Flex
+                style={styles.float}
+                flexDirection="row-reverse"
+                alignItems="center"
+                gap={6}
+            >
+                {anySelectedTasks ? (
+                    <>
+                        <Button
+                            variant="icon"
+                            style={[
+                                styles.selectionButton,
+                                { backgroundColor: primary },
+                            ]}
+                            onPress={resetSelectedTasks}
+                        >
+                            <AntDesign name="close" size={24} color="#fff" />
+                        </Button>
+                        <Button
+                            variant="icon"
+                            style={[
+                                styles.selectionButton,
+                                { backgroundColor: primary },
+                            ]}
+                        >
+                            <AntDesign name="heart" size={24} color="#fff" />
+                        </Button>
+                        <Button
+                            variant="icon"
+                            style={[
+                                styles.selectionButton,
+                                { backgroundColor: warning },
+                            ]}
+                            onPress={deleteSelectedTasks}
+                        >
+                            <AntDesign name="delete" size={24} color="#fff" />
+                        </Button>
+                    </>
+                ) : (
+                    <Button
+                        variant="icon"
+                        style={[
+                            styles.selectionButton,
+                            { backgroundColor: primary },
+                        ]}
+                        onPress={jumpToAddForm}
+                    >
+                        <AntDesign name="plus" size={24} color="#fff" />
+                    </Button>
+                )}
+            </Flex>
+        )
+    );
+}
+
+const styles = StyleSheet.create({
+    float: {
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        margin: 12,
+    },
+    selectionButton: {
+        width: 64,
+        height: 64,
+        borderRadius: 64,
+    },
+});

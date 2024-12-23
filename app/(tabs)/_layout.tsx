@@ -1,14 +1,13 @@
 import { Tabs } from "expo-router";
 
-import AddButton from "@/components/menu/AddButton";
+import SelectionMenu from "@/components/menu/SelectionMenu";
 
 export default function TabLayout() {
     return (
         <Tabs
-            tabBar={() => <AddButton />}
+            tabBar={() => <SelectionMenu />}
             screenOptions={{
                 headerShown: false,
-                tabBarActiveTintColor: "blue",
             }}
         />
     );
