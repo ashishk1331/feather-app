@@ -41,7 +41,7 @@ export default function Header() {
         let timer: ReturnType<typeof setInterval>;
         timer = setInterval(() => {
             setHeadline(nextHeadline.next().value);
-        }, 2 * 1000);
+        }, 10 * 1000);
 
         return () => clearInterval(timer);
     }, []);

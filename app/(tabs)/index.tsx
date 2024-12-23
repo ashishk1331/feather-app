@@ -3,15 +3,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import Header from "@/components/Header";
 import List from "@/components/List";
-import Container from "@/components/layout/Container";
+import { useTheme } from "@/hooks/useTheme";
 
 export default function Page() {
+    const { background: backgroundColor } = useTheme();
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-            <Container>
-                <Header />
-                <List />
-            </Container>
+        <SafeAreaView style={{ flex: 1, padding: 12, backgroundColor }}>
+            <Header />
+            <List />
         </SafeAreaView>
     );
 }
