@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { DayNames } from "@/constants/Days";
+import { useTheme } from "@/hooks/useTheme";
 import { DayNameType } from "@/types/days";
 
 import Flex from "../layout/Flex";
@@ -60,20 +61,22 @@ type PillProps = {
 };
 
 function Pill({ label, isSelected = false, handlePress }: PillProps) {
+    const { text: color, primary } = useTheme();
     return (
         <Button
             variant="outline"
             style={[
                 styles.pill,
-                isSelected ? styles.selected : styles.deselected,
+                {
+                    backgroundColor: isSelected ? primary : "transparent",
+                    borderColor: isSelected ? "transparent" : color + "44",
+                },
             ]}
             onPress={handlePress}
         >
             <Text
                 variant="body"
-                style={[
-                    isSelected ? styles.selectedText : styles.deselectedText,
-                ]}
+                style={{ color: isSelected ? "#fff" : color + "88" }}
             >
                 {label}
             </Text>
@@ -85,18 +88,5 @@ const styles = StyleSheet.create({
     pill: {
         flex: 1,
         padding: 10,
-    },
-    selected: {
-        borderColor: "transparent",
-        backgroundColor: "#865dff",
-    },
-    selectedText: {
-        color: "#fff",
-    },
-    deselected: {
-        borderColor: "#d4d4d4",
-    },
-    deselectedText: {
-        color: "#000",
     },
 });

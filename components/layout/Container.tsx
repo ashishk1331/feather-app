@@ -1,12 +1,19 @@
 import { PropsWithChildren } from "react";
 import { ScrollView, StyleProp, StyleSheet, ViewStyle } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
+
 type ContainerProps = {
     style?: StyleProp<ViewStyle>;
 } & PropsWithChildren;
 
 export default function Container(props: ContainerProps) {
-    return <ScrollView style={styles.container}>{props.children}</ScrollView>;
+    const { background: backgroundColor } = useTheme();
+    return (
+        <ScrollView style={[styles.container, { backgroundColor }]}>
+            {props.children}
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({

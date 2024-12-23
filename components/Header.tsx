@@ -1,8 +1,9 @@
 import { format } from "date-fns";
-import { MotiText } from "moti";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
+import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
 import { fetchNextHeadline } from "@/util/greeting";
 
@@ -15,6 +16,8 @@ import Progress from "./primitives/Progress";
 import Text from "./primitives/Text";
 
 export default function Header() {
+    const { primary: primaryColor, text: textColor } = useTheme();
+    const toggleDarkMode = useConfigStore((state) => state.toggleDarkMode);
     const finishedList = useTaskStore((state) => state.finished);
     const tasks = useTaskStore((state) => state.tasks);
     const finishedTasksCount = finishedList.size;
@@ -38,7 +41,7 @@ export default function Header() {
         let timer: ReturnType<typeof setInterval>;
         timer = setInterval(() => {
             setHeadline(nextHeadline.next().value);
-        }, 10 * 1000);
+        }, 2 * 1000);
 
         return () => clearInterval(timer);
     }, []);
@@ -56,20 +59,20 @@ export default function Header() {
                     justifyContent="flex-start"
                     style={{ marginVertical: 6 }}
                 >
-                    <Button variant="icon">
-                        <FontAwesome name="circle" size={24} color="#865dff" />
+                    <Button variant="icon" onPress={toggleDarkMode}>
+                        <FontAwesome
+                            name="circle"
+                            size={24}
+                            color={primaryColor}
+                        />
                     </Button>
-                    <MotiText
+                    <Text
                         key={headline}
-                        from={{ opacity: 0, translateY: -12 }}
-                        animate={{ opacity: 1, translateY: 0 }}
-                        transition={{
-                            type: "timing",
-                        }}
                         style={{ fontSize: 24, fontWeight: "bold" }}
+                        animate="rolling"
                     >
                         {headline}
-                    </MotiText>
+                    </Text>
                 </Flex>
                 <Flex
                     flexDirection="row"
@@ -79,20 +82,13 @@ export default function Header() {
                 >
                     <Text>{today}</Text>
                     <Progress widthPercentage={percentageComplete} />
-                    <MotiText
-                        key={prompt}
-                        from={{ opacity: 0, translateY: -12 }}
-                        animate={{ opacity: 1, translateY: 0 }}
-                        transition={{
-                            type: "timing",
-                        }}
-                    >
+                    <Text key={prompt} animate="rolling">
                         {prompt}
-                    </MotiText>
+                    </Text>
                 </Flex>
             </Flex>
             <Button variant="icon">
-                <Feather name="folder" size={24} color="#020617" />
+                <Feather name="folder" size={24} color={textColor} />
             </Button>
         </Flex>
     );

@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { MotiView } from "moti";
 import { StyleSheet } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
 import { useTaskStore } from "@/store/TaskStore";
 import { Task } from "@/types/task";
 
@@ -17,6 +18,8 @@ type TaskItemProps = {
 };
 
 export default function TaskItem({ index = 0, task }: TaskItemProps) {
+    const { text: color } = useTheme();
+
     const finishedList = useTaskStore((state) => state.finished);
     const finished = finishedList.has(task.id);
 
@@ -32,7 +35,9 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
             <Flex
                 style={[
                     styles.box,
-                    isSelected ? styles.selected : styles.deselected,
+                    {
+                        borderColor: isSelected ? color : color + "20",
+                    },
                 ]}
                 flexDirection="row"
                 justifyContent="space-between"
@@ -46,7 +51,16 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                     alignItems="flex-start"
                     gap={8}
                 >
-                    <Text style={[finished ? styles.strikedoff : {}]}>
+                    <Text
+                        style={[
+                            {
+                                color: !finished ? color : color + "88",
+                                textDecorationLine: finished
+                                    ? "line-through"
+                                    : "none",
+                            },
+                        ]}
+                    >
                         {task.title}
                     </Text>
                     <Pill text={format(new Date(task.due_date), "d MMM")} />
@@ -63,15 +77,5 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 6,
         marginVertical: 6,
-    },
-    strikedoff: {
-        textDecorationLine: "line-through",
-        color: "#6b7280",
-    },
-    selected: {
-        borderColor: "#020617",
-    },
-    deselected: {
-        borderColor: "#d4d4d4",
     },
 });

@@ -11,7 +11,7 @@ interface TaskState {
 }
 
 export const useTaskStore = create<TaskState>()((set) => ({
-    tasks: [],
+    tasks: dummyTasks as Task[],
     finished: new Set(),
     selected: new Set(),
     addTask(task) {

@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
+
 import Text from "./Text";
 
 type PillProps = {
@@ -7,7 +9,12 @@ type PillProps = {
 };
 
 export default function Pill({ text }: PillProps) {
-    return <Text style={styles.pill}>{text}</Text>;
+    const { text: color, primary } = useTheme();
+    return (
+        <Text style={[styles.pill, { backgroundColor: primary + "20" }]}>
+            {text}
+        </Text>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -16,6 +23,5 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 4,
         borderRadius: 12,
-        backgroundColor: "#f3f4f6",
     },
 });

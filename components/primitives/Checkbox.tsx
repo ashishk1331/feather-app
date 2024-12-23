@@ -1,5 +1,6 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
 import { useTaskStore } from "@/store/TaskStore";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -10,6 +11,7 @@ type CheckboxProps = {
 };
 
 export default function Checkbox({ id, isFinished = false }: CheckboxProps) {
+    const { primary, background: backgroundColor, text: color } = useTheme();
     function toggleFinishStatus(id: number) {
         useTaskStore.setState((prev) => {
             const updateFinished = new Set(prev.finished);
@@ -27,15 +29,18 @@ export default function Checkbox({ id, isFinished = false }: CheckboxProps) {
     }
 
     return (
-        <TouchableOpacity
+        <Pressable
             style={[
                 styles.checkbox,
-                isFinished ? styles.selected : styles.deselected,
+                {
+                    borderColor: color + "44",
+                    backgroundColor: isFinished ? primary : backgroundColor,
+                },
             ]}
             onPress={() => toggleFinishStatus(id)}
         >
             {isFinished && <AntDesign name="check" size={20} color="#fff" />}
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 
@@ -51,11 +56,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    selected: {
-        backgroundColor: "#865dff",
-        borderColor: "#020617",
-    },
-    deselected: {
-        borderColor: "#a3a3a3",
-    },
+    // selected: {
+    //     backgroundColor: "#865dff",
+    // },
+    // deselected: {
+    //     borderColor: "#a3a3a3",
+    // },
 });

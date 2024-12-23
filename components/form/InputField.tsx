@@ -1,5 +1,7 @@
 import { StyleSheet, TextInput } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
+
 import Flex from "../layout/Flex";
 import Text from "../primitives/Text";
 
@@ -18,15 +20,17 @@ export default function InputField({
     placeholder = "",
     followup = "",
 }: InputFieldProps) {
+    const { text: color } = useTheme();
     return (
         <Flex flex={1} flexDirection="column" gap={10}>
             <Text>{label}</Text>
             <TextInput
                 cursorColor="#000"
-                style={styles.inputbox}
+                style={[styles.inputbox, { borderColor: color + "20" }]}
                 value={value}
                 onChangeText={onChangeText}
                 placeholder={placeholder}
+                placeholderTextColor={color + "88"}
             />
             {followup && (
                 <Text style={{ color: "#a3a3a3" }} variant="caption">
@@ -42,7 +46,6 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
         borderWidth: 1,
-        borderColor: "#d4d4d4",
         borderRadius: 12,
         fontSize: 16,
     },

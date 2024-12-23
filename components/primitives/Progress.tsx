@@ -1,20 +1,27 @@
 import { MotiView } from "moti";
 import { StyleSheet } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
+
 import Flex from "../layout/Flex";
 
 type ProgressProps = {
     widthPercentage: number;
 };
 
-// width should be percentage
+// width should be percentage [0, 1]
 export default function Progress({ widthPercentage = 0 }: ProgressProps) {
+    const { text: color, primary } = useTheme();
     widthPercentage = Math.min(100, widthPercentage);
     return (
         <Flex
             alignItems="flex-start"
             justifyContent="flex-start"
-            style={[styles.pill, styles.outerPill]}
+            style={[
+                styles.pill,
+                styles.outerPill,
+                { backgroundColor: primary + "20" },
+            ]}
         >
             <MotiView
                 from={{ width: 0 }}
@@ -23,7 +30,7 @@ export default function Progress({ widthPercentage = 0 }: ProgressProps) {
                     type: "timing",
                     duration: 350,
                 }}
-                style={[styles.pill, styles.innerPill]}
+                style={[styles.pill, { backgroundColor: primary }]}
             />
         </Flex>
     );
@@ -36,10 +43,6 @@ const styles = StyleSheet.create({
     },
     outerPill: {
         width: 64,
-        backgroundColor: "#f3f4f6",
-    },
-    innerPill: {
-        // width: 8,
-        backgroundColor: "#865dff",
+        overflow: "hidden",
     },
 });

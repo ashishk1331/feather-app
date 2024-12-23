@@ -7,37 +7,46 @@ import {
     ViewStyle,
 } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
+
 import Text from "./Text";
 
 type ButtonProps = {
     title?: string;
     onPress?: () => void;
     variant: "icon" | "ghost" | "primary" | "secondary" | "outline";
-    color?: string; // Button color
-    textColor?: string; // Text color
-    style?: StyleProp<ViewStyle>; // Custom styles for the button
-    textStyle?: StyleProp<TextStyle>; // Custom styles for the text
-    disabled?: boolean; // Disable the button
+    style?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
+    disabled?: boolean;
 };
+
+type StyleObj = Record<string, StyleProp<ViewStyle>>;
 
 const Button: React.FC<ButtonProps & PropsWithChildren> = ({
     title,
     onPress,
     variant = "primary",
-    color = "#fff",
-    textColor = "#000",
     style,
     textStyle,
     disabled = false,
     children,
 }) => {
+    const { background: backgroundColor, text: color } = useTheme();
+
+    const buttonVarirants: StyleObj = {
+        outline: {
+            borderWidth: 1,
+            borderColor: color + "44",
+        },
+    };
     return (
         <Pressable
             onPress={onPress}
             style={[
                 styles.button,
-                { backgroundColor: disabled ? "#ddd" : color },
+                { backgroundColor },
                 styles[variant],
+                buttonVarirants[variant],
                 style,
             ]}
             disabled={disabled}
@@ -47,7 +56,7 @@ const Button: React.FC<ButtonProps & PropsWithChildren> = ({
                 <Text
                     style={[
                         styles.text,
-                        { color: variant === "primary" ? "#fff" : textColor },
+                        { color: variant === "primary" ? "#fff" : color },
                         textStyle,
                     ]}
                 >
@@ -76,10 +85,6 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         fontWeight: "bold",
-    },
-    outline: {
-        borderWidth: 1,
-        borderColor: "#000",
     },
 });
 

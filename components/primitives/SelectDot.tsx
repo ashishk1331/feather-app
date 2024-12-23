@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, View } from "react-native";
 
+import { useTheme } from "@/hooks/useTheme";
 import { useTaskStore } from "@/store/TaskStore";
 
 type SelectDotProps = {
@@ -8,6 +9,7 @@ type SelectDotProps = {
 };
 
 export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
+    const { text: color } = useTheme();
     function toggleSelectedStatus(id: number) {
         useTaskStore.setState((prev) => {
             const updateSelected = new Set(prev.selected);
@@ -32,6 +34,7 @@ export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
             <View
                 style={[
                     styles.checkbox,
+                    { backgroundColor: isSelected ? color : color + "44" },
                     isSelected ? styles.selected : styles.deselected,
                 ]}
             />
@@ -53,12 +56,10 @@ const styles = StyleSheet.create({
         width: 12,
         height: 12,
         borderRadius: 12,
-        backgroundColor: "#020617",
     },
     deselected: {
         width: 6,
         height: 6,
         borderRadius: 6,
-        backgroundColor: "#d4d4d4",
     },
 });
