@@ -27,7 +27,7 @@ export default function Header({ tasksToDisplayLength }: HeaderProps) {
     const toggleDarkMode = useConfigStore((state) => state.toggleDarkMode);
 
     const finishedList = useTaskStore((state) => state.finished);
-    const finishedTasksCount = finishedList.size;
+    const finishedTasksCount = finishedList.length;
     const percentageComplete = finishedTasksCount / tasksToDisplayLength;
 
     const today = format(new Date(), "d MMM");

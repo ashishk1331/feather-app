@@ -29,7 +29,8 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
     const viewAll = useConfigStore((state) => state.viewAll);
 
     const finishedList = useTaskStore((state) => state.finished);
-    const finished = finishedList.has(task.id);
+    const finished = finishedList.includes(task.id);
+    const toggleFinished = useTaskStore((state) => state.toggleFinished);
 
     const selectedList = useTaskStore((state) => state.selected);
     const isSelected = selectedList.has(task.id);
@@ -52,7 +53,13 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                 alignItems="center"
                 gap={12}
             >
-                {!viewAll && <Checkbox id={task.id} isFinished={finished} />}
+                {!viewAll && (
+                    <Checkbox
+                        id={task.id}
+                        isFinished={finished}
+                        toggleFinishStatus={toggleFinished}
+                    />
+                )}
                 <Flex
                     style={{ width: viewAll ? "84%" : "60%" }}
                     flexDirection="column"

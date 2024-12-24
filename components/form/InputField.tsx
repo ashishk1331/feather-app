@@ -25,8 +25,8 @@ export default function InputField({
         <Flex flex={1} flexDirection="column" gap={10}>
             <Text>{label}</Text>
             <TextInput
-                cursorColor="#000"
-                style={[styles.inputbox, { borderColor: color + "20" }]}
+                cursorColor={color}
+                style={[styles.inputbox, { borderColor: color + "20", color }]}
                 value={value}
                 onChangeText={onChangeText}
                 placeholder={placeholder}

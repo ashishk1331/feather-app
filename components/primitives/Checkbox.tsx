@@ -1,33 +1,21 @@
 import { Pressable, StyleSheet } from "react-native";
 
 import { useTheme } from "@/hooks/useTheme";
-import { useTaskStore } from "@/store/TaskStore";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 type CheckboxProps = {
     id: string;
     isFinished: boolean;
+    toggleFinishStatus(id: string): void;
 };
 
-export default function Checkbox({ id, isFinished = false }: CheckboxProps) {
+export default function Checkbox({
+    id,
+    isFinished = false,
+    toggleFinishStatus,
+}: CheckboxProps) {
     const { primary, background: backgroundColor, text: color } = useTheme();
-    function toggleFinishStatus(id: string) {
-        useTaskStore.setState((prev) => {
-            const updateFinished = new Set(prev.finished);
-
-            if (isFinished) {
-                updateFinished.delete(id);
-            } else {
-                updateFinished.add(id);
-            }
-
-            return {
-                finished: updateFinished,
-            };
-        });
-    }
-
     return (
         <Pressable
             style={[
