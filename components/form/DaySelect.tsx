@@ -17,6 +17,7 @@ type DaySelectProps = {
 };
 
 export default function DaySelect({ days, toggleDay }: DaySelectProps) {
+    const { text: color } = useTheme();
     return (
         <Flex gap={12}>
             <Text>days</Text>
@@ -50,6 +51,12 @@ export default function DaySelect({ days, toggleDay }: DaySelectProps) {
                     />
                 ))}
             </Flex>
+            <Text
+                style={{ color: color + "88", marginTop: 6 }}
+                variant="caption"
+            >
+                Select days when to perform the task
+            </Text>
         </Flex>
     );
 }

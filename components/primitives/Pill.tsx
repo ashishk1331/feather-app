@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleProp, StyleSheet, TextStyle } from "react-native";
 
 import { useTheme } from "@/hooks/useTheme";
 
@@ -6,12 +6,13 @@ import Text from "./Text";
 
 type PillProps = {
     text: string;
+    style?: StyleProp<TextStyle>;
 };
 
-export default function Pill({ text }: PillProps) {
-    const { text: color, primary } = useTheme();
+export default function Pill({ text, style }: PillProps) {
+    const { primary } = useTheme();
     return (
-        <Text style={[styles.pill, { backgroundColor: primary + "20" }]}>
+        <Text style={[styles.pill, { backgroundColor: primary + "20" }, style]}>
             {text}
         </Text>
     );

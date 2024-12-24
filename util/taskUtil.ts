@@ -4,7 +4,11 @@ import * as Crypto from "expo-crypto";
 import { DayNameType } from "@/types/days";
 import { Task } from "@/types/task";
 
-export function generateTask(prompt: string, days: DayNameType[]): Task {
+export function generateTask(
+    prompt: string,
+    days: DayNameType[],
+    priority: Task["priority"],
+): Task {
     const UUID = Crypto.randomUUID();
     const daysOfWork = days.includes("all") ? "all" : days;
     const createdAt = new Date().toJSON();
@@ -18,7 +22,7 @@ export function generateTask(prompt: string, days: DayNameType[]): Task {
         tags: [],
         days: daysOfWork,
         due_date: new Date().toJSON(),
-        priority: "low",
+        priority,
     };
 }
 
@@ -34,4 +38,8 @@ export function sortTodayTasks(tasks: Task[]): Task[] {
         }
     }
     return validTasks;
+}
+
+export function captilize(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }

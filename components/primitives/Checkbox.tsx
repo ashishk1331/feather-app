@@ -6,13 +6,13 @@ import { useTaskStore } from "@/store/TaskStore";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 type CheckboxProps = {
-    id: number;
+    id: string;
     isFinished: boolean;
 };
 
 export default function Checkbox({ id, isFinished = false }: CheckboxProps) {
     const { primary, background: backgroundColor, text: color } = useTheme();
-    function toggleFinishStatus(id: number) {
+    function toggleFinishStatus(id: string) {
         useTaskStore.setState((prev) => {
             const updateFinished = new Set(prev.finished);
 

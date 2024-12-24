@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 
 import DaySelect from "@/components/form/DaySelect";
 import InputField from "@/components/form/InputField";
+import PrioritySelection from "@/components/form/PrioritySelection";
 import Container from "@/components/layout/Container";
 import Flex from "@/components/layout/Flex";
 import Button from "@/components/primitives/Button";
@@ -17,12 +18,14 @@ export default function AddForm() {
     const prompt = useFormStore((state) => state.prompt);
     const setPrompt = useFormStore((state) => state.setPrompt);
     const resetForm = useFormStore((state) => state.reset);
+    const priority = useFormStore((state) => state.priority);
+    const setPriority = useFormStore((state) => state.setPriority);
 
     const addTask = useTaskStore((state) => state.addTask);
 
     function handleSubmit() {
         try {
-            addTask(generateTask(prompt, days));
+            addTask(generateTask(prompt, days, priority));
         } finally {
             resetForm();
             router.push("/");
@@ -53,6 +56,10 @@ export default function AddForm() {
                         followup="Use @ to highlight words."
                     />
                     <DaySelect days={days} toggleDay={toggleDay} />
+                    <PrioritySelection
+                        priority={priority}
+                        setPriority={setPriority}
+                    />
                     <Flex
                         flex={1}
                         flexDirection="row"

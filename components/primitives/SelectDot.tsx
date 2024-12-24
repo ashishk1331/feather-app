@@ -4,13 +4,13 @@ import { useTheme } from "@/hooks/useTheme";
 import { useTaskStore } from "@/store/TaskStore";
 
 type SelectDotProps = {
-    id: number;
+    id: string;
     isSelected: boolean;
 };
 
 export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
     const { text: color } = useTheme();
-    function toggleSelectedStatus(id: number) {
+    function toggleSelectedStatus(id: string) {
         useTaskStore.setState((prev) => {
             const updateSelected = new Set(prev.selected);
 

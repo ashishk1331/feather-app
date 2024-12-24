@@ -2,15 +2,18 @@ import { create } from "zustand";
 
 import { DayNames } from "@/constants/Days";
 import { type DayNameType } from "@/types/days";
+import { Task } from "@/types/task";
 
 interface FormState {
     prompt: string;
     days: DayNameType[];
+    priority: Task["priority"];
 }
 
 interface FormActions {
     setPrompt(newPrompt: string): void;
     toggleDay(dayName: DayNameType): void;
+    setPriority(newPriority: Task["priority"]): void;
     reset(): void;
 }
 
@@ -48,6 +51,7 @@ function checkOrAddDay<T extends DayNameType[], V extends DayNameType>(
 const initialState: FormState = {
     prompt: "",
     days: [],
+    priority: "low",
 };
 
 export const useFormStore = create<FormState & FormActions>()((set) => ({
@@ -61,6 +65,10 @@ export const useFormStore = create<FormState & FormActions>()((set) => ({
         return set((prev) => ({
             days: checkOrAddDay(prev.days, dayName),
         }));
+    },
+
+    setPriority(newPriority) {
+        return set({ priority: newPriority });
     },
 
     reset() {

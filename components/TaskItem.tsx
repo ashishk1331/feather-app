@@ -6,6 +6,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
 import { Task } from "@/types/task";
+import { captilize } from "@/util/taskUtil";
 
 import Flex from "./layout/Flex";
 import Checkbox from "./primitives/Checkbox";
@@ -19,7 +20,11 @@ type TaskItemProps = {
 };
 
 export default function TaskItem({ index = 0, task }: TaskItemProps) {
-    const { text: color } = useTheme();
+    const { text: color, ...colors } = useTheme();
+
+    const pillBg =
+        colors[("priority" + captilize(task.priority)) as keyof typeof colors] +
+        "20";
 
     const viewAll = useConfigStore((state) => state.viewAll);
 
@@ -73,6 +78,10 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                         style={{ flexWrap: "wrap" }}
                     >
                         <Pill text={format(new Date(task.due_date), "d MMM")} />
+                        <Pill
+                            text={task.priority}
+                            style={{ backgroundColor: pillBg }}
+                        />
                         {viewAll &&
                             (task.days === "all" ? (
                                 <Pill text="every day" />

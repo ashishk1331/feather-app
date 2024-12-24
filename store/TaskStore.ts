@@ -5,8 +5,8 @@ import { Task } from "@/types/task";
 
 interface TaskState {
     tasks: Task[];
-    finished: Set<number>;
-    selected: Set<number>;
+    finished: Set<string>;
+    selected: Set<string>;
     addTask: (task: Task) => void;
 }
 

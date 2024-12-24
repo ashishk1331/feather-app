@@ -4,6 +4,9 @@ const tintColorDark = "#fff";
 const brand = {
     primary: "#865dff",
     warning: "#ef4444",
+    priorityLow: "#10b981",
+    priorityMedium: "#eab308",
+    priorityHigh: "#f87171",
 };
 
 export const Colors = {

@@ -1,21 +1,16 @@
 import { FlatList, StyleSheet } from "react-native";
 
-import { useConfigStore } from "@/store/Config";
-import { useTaskStore } from "@/store/TaskStore";
-import { sortTodayTasks } from "@/util/taskUtil";
+import { Task } from "@/types/task";
 
 import TaskItem from "./TaskItem";
 import EmptyList from "./placeholder/EmptyList";
 import ListFooter from "./placeholder/ListFooter";
 
-export default function List() {
-    const viewAll = useConfigStore((state) => state.viewAll);
+type ListProps = {
+    tasksToDisplay: Task[];
+};
 
-    const tasks = useTaskStore((state) => state.tasks);
-    const todayTasks = sortTodayTasks(tasks);
-
-    const tasksToDisplay = viewAll ? tasks : todayTasks;
-
+export default function List({ tasksToDisplay }: ListProps) {
     return tasksToDisplay.length > 0 ? (
         <FlatList
             style={styles.outer}

@@ -15,7 +15,11 @@ import Button from "./primitives/Button";
 import Progress from "./primitives/Progress";
 import Text from "./primitives/Text";
 
-export default function Header() {
+type HeaderProps = {
+    tasksToDisplayLength: number;
+};
+
+export default function Header({ tasksToDisplayLength }: HeaderProps) {
     const { primary: primaryColor, text: textColor } = useTheme();
 
     const viewAll = useConfigStore((state) => state.viewAll);
@@ -23,9 +27,8 @@ export default function Header() {
     const toggleDarkMode = useConfigStore((state) => state.toggleDarkMode);
 
     const finishedList = useTaskStore((state) => state.finished);
-    const tasks = useTaskStore((state) => state.tasks);
     const finishedTasksCount = finishedList.size;
-    const percentageComplete = finishedTasksCount / tasks.length;
+    const percentageComplete = finishedTasksCount / tasksToDisplayLength;
 
     const today = format(new Date(), "d MMM");
 
@@ -35,7 +38,7 @@ export default function Header() {
     let prompt = "";
     if (finishedTasksCount === 0) {
         prompt = "Yet to start";
-    } else if (finishedTasksCount === tasks.length) {
+    } else if (finishedTasksCount === tasksToDisplayLength) {
         prompt = "All Done";
     } else {
         prompt = `${finishedTasksCount} Done`;

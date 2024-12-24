@@ -33,7 +33,7 @@ export default function InputField({
                 placeholderTextColor={color + "88"}
             />
             {followup && (
-                <Text style={{ color: "#a3a3a3" }} variant="caption">
+                <Text style={{ color: color + "88" }} variant="caption">
                     {followup}
                 </Text>
             )}
