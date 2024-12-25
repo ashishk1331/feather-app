@@ -87,6 +87,14 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                         gap={6}
                         style={{ flexWrap: "wrap" }}
                     >
+                        {task.archived && (
+                            <Pill
+                                text="archived"
+                                style={{
+                                    backgroundColor: colors.priorityHigh + "20",
+                                }}
+                            />
+                        )}
                         <Pill text={format(new Date(task.due_date), "d MMM")} />
                         <Pill
                             text={task.priority}

@@ -9,7 +9,8 @@
         "tags": ["documentation", "team"],
         "due_date": "2025-01-15T09:00:00.000Z",
         "days": "all",
-        "priority": "high"
+        "priority": "high",
+        "archived": true
     },
     {
         "id": "cfa6f6d9-3e5b-4197-b4c2-8d286aa3b811",
@@ -21,7 +22,8 @@
         "tags": ["writing", "blog"],
         "due_date": "2025-02-20T10:30:00.000Z",
         "days": ["mon", "tue"],
-        "priority": "medium"
+        "priority": "medium",
+        "archived": false
     },
     {
         "id": "456ec824-2822-47eb-9c52-c8c7534efdf0",
@@ -33,7 +35,8 @@
         "tags": ["design", "UI"],
         "due_date": "2025-03-05T14:00:00.000Z",
         "days": "all",
-        "priority": "high"
+        "priority": "high",
+        "archived": true
     },
     {
         "id": "eca546d7-8e18-403d-93a8-9e4f65d34fff",
@@ -45,7 +48,8 @@
         "tags": ["marketing", "social media"],
         "due_date": "2025-04-10T11:15:00.000Z",
         "days": ["thr", "fri"],
-        "priority": "high"
+        "priority": "high",
+        "archived": false
     },
     {
         "id": "4781c5eb-b54e-4aa2-af76-68991c736f4a",
@@ -57,7 +61,8 @@
         "tags": ["development", "dependencies"],
         "due_date": "2025-05-25T16:45:00.000Z",
         "days": "all",
-        "priority": "medium"
+        "priority": "medium",
+        "archived": true
     },
     {
         "id": "cb44cdfd-314d-4a29-8b47-fa744018470e",
@@ -69,7 +74,8 @@
         "tags": ["testing", "QA"],
         "due_date": "2025-06-18T08:30:00.000Z",
         "days": ["wed", "thr"],
-        "priority": "high"
+        "priority": "high",
+        "archived": false
     },
     {
         "id": "1f8d7b25-dadb-47e9-9bc5-4a66ba2a4eab",
@@ -81,7 +87,8 @@
         "tags": ["presentation", "product"],
         "due_date": "2025-07-02T12:00:00.000Z",
         "days": "all",
-        "priority": "medium"
+        "priority": "medium",
+        "archived": true
     },
     {
         "id": "7c7b6227-8913-4f44-b9cf-5550fb306425",
@@ -93,7 +100,8 @@
         "tags": ["API", "documentation"],
         "due_date": "2025-08-17T13:30:00.000Z",
         "days": "all",
-        "priority": "medium"
+        "priority": "medium",
+        "archived": false
     },
     {
         "id": "6ad02f15-61c6-41e9-87f0-29f5ec45bd50",
@@ -105,7 +113,8 @@
         "tags": ["bugs", "development"],
         "due_date": "2025-09-22T15:00:00.000Z",
         "days": ["mon", "tue", "wed"],
-        "priority": "high"
+        "priority": "high",
+        "archived": true
     },
     {
         "id": "63fdaaf4-a488-40ad-a070-a3f8954cbd2a",
@@ -117,7 +126,8 @@
         "tags": ["review", "code"],
         "due_date": "2025-10-11T09:45:00.000Z",
         "days": "all",
-        "priority": "high"
+        "priority": "high",
+        "archived": false
     },
     {
         "id": "d282337c-3695-4529-8c28-0b3ebbe3fc71",
@@ -129,7 +139,8 @@
         "tags": ["planning", "product"],
         "due_date": "2025-11-06T10:30:00.000Z",
         "days": ["mon", "tue"],
-        "priority": "medium"
+        "priority": "medium",
+        "archived": true
     },
     {
         "id": "90bf1ff3-3708-4ba6-8393-44f7ccccfc84",
@@ -141,7 +152,8 @@
         "tags": ["testing", "user"],
         "due_date": "2025-12-01T16:00:00.000Z",
         "days": "all",
-        "priority": "high"
+        "priority": "high",
+        "archived": false
     },
     {
         "id": "489dbe95-32cf-421a-a5ca-294782bb55bd",
@@ -151,236 +163,9 @@
         "liked": true,
         "type": "task",
         "tags": ["design", "mobile"],
-        "due_date": "2025-01-10T10:00:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "high"
-    },
-    {
-        "id": "d31a78c3-aa5b-4d00-ad3c-e444f3d8af5e",
-        "createdAt": "2024-12-23T09:05:00.000Z",
-        "updatedAt": "2024-12-23T09:05:00.000Z",
-        "title": "Write Comprehensive Guide on React State Management",
-        "liked": false,
-        "type": "task",
-        "tags": ["writing", "react"],
-        "due_date": "2025-01-15T16:00:00.000Z",
-        "days": ["tue", "thr"],
-        "priority": "medium"
-    },
-    {
-        "id": "8a192a68-d07e-428a-81ba-1b6bcde92384",
-        "createdAt": "2024-12-23T09:10:00.000Z",
-        "updatedAt": "2024-12-23T09:10:00.000Z",
-        "title": "Conduct Performance Testing for API Endpoints",
-        "liked": true,
-        "type": "task",
-        "tags": ["testing", "backend"],
-        "due_date": "2025-01-20T14:00:00.000Z",
-        "days": ["all"],
-        "priority": "high"
-    },
-    {
-        "id": "cd80bce6-8cd6-4349-b45a-4a456aeecf85",
-        "createdAt": "2024-12-23T09:15:00.000Z",
-        "updatedAt": "2024-12-23T09:15:00.000Z",
-        "title": "Prepare Marketing Assets for Feature Rollout",
-        "liked": false,
-        "type": "task",
-        "tags": ["marketing", "design"],
-        "due_date": "2025-01-25T11:30:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "medium"
-    },
-    {
-        "id": "747efe5a-5520-415f-914b-f6964b341d9a",
-        "createdAt": "2024-12-23T09:20:00.000Z",
-        "updatedAt": "2024-12-23T09:20:00.000Z",
-        "title": "Review Security Protocols for Upcoming Audit",
-        "liked": true,
-        "type": "task",
-        "tags": ["security", "audit"],
-        "due_date": "2025-02-05T09:00:00.000Z",
-        "days": ["tue", "thr"],
-        "priority": "high"
-    },
-    {
-        "id": "d7c87ebe-7f79-445c-bd5d-7181f5a72019",
-        "createdAt": "2024-12-23T09:25:00.000Z",
-        "updatedAt": "2024-12-23T09:25:00.000Z",
-        "title": "Develop User Onboarding Flow for Web Application",
-        "liked": false,
-        "type": "task",
-        "tags": ["development", "web"],
-        "due_date": "2025-02-10T13:00:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "medium"
-    },
-    {
-        "id": "8e8c80f6-a43e-465b-b946-0a60c1523036",
-        "createdAt": "2024-12-23T09:30:00.000Z",
-        "updatedAt": "2024-12-23T09:30:00.000Z",
-        "title": "Optimize Database Queries for Performance Improvement",
-        "liked": true,
-        "type": "task",
-        "tags": ["database", "optimization"],
-        "due_date": "2025-02-15T15:00:00.000Z",
-        "days": ["all"],
-        "priority": "high"
-    },
-    {
-        "id": "db0684e5-a9b6-4b60-b76a-7ed63a753583",
-        "createdAt": "2024-12-23T09:35:00.000Z",
-        "updatedAt": "2024-12-23T09:35:00.000Z",
-        "title": "Plan Social Media Strategy for Product Launch",
-        "liked": false,
-        "type": "task",
-        "tags": ["social media", "strategy"],
-        "due_date": "2025-02-20T12:30:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "medium"
-    },
-    {
-        "id": "aa6e12a0-a1e4-4f92-9cc3-b74255ac7c21",
-        "createdAt": "2024-12-23T09:40:00.000Z",
-        "updatedAt": "2024-12-23T09:40:00.000Z",
-        "title": "Write Unit Tests for Core Application Modules",
-        "liked": true,
-        "type": "task",
-        "tags": ["testing", "development"],
-        "due_date": "2025-02-25T08:30:00.000Z",
-        "days": ["tue", "thr"],
-        "priority": "high"
-    },
-    {
-        "id": "9c7dbb30-01a5-4375-8a2f-30c050d1af5d",
-        "createdAt": "2024-12-23T09:45:00.000Z",
-        "updatedAt": "2024-12-23T09:45:00.000Z",
-        "title": "Analyze Customer Feedback from Recent Survey",
-        "liked": false,
-        "type": "task",
-        "tags": ["analysis", "feedback"],
-        "due_date": "2025-03-01T14:00:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "medium"
-    },
-    {
-        "id": "3838586e-660f-45a0-b519-63e6777836e9",
-        "createdAt": "2024-12-23T09:50:00.000Z",
-        "updatedAt": "2024-12-23T09:50:00.000Z",
-        "title": "Finalize Content Plan for Monthly Newsletter",
-        "liked": true,
-        "type": "task",
-        "tags": ["content", "newsletter"],
-        "due_date": "2025-03-05T11:00:00.000Z",
-        "days": ["all"],
-        "priority": "medium"
-    },
-    {
-        "id": "3591ac45-4bac-473f-a07c-32e5071ea4c8",
-        "createdAt": "2024-12-23T09:55:00.000Z",
-        "updatedAt": "2024-12-23T09:55:00.000Z",
-        "title": "Integrate Payment Gateway into E-commerce Platform",
-        "liked": false,
-        "type": "task",
-        "tags": ["integration", "e-commerce"],
-        "due_date": "2025-03-10T09:00:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "high"
-    },
-    {
-        "id": "bff9f62f-2c9a-4934-ab08-5b98af8c8d4d",
-        "createdAt": "2024-12-23T10:00:00.000Z",
-        "updatedAt": "2024-12-23T10:00:00.000Z",
-        "title": "Host Webinar on Advanced Web Development Techniques",
-        "liked": true,
-        "type": "task",
-        "tags": ["webinar", "web development"],
-        "due_date": "2025-03-15T13:30:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "medium"
-    },
-    {
-        "id": "a7091555-81f7-42d8-80f9-ea4169c33558",
-        "createdAt": "2024-12-23T10:05:00.000Z",
-        "updatedAt": "2024-12-23T10:05:00.000Z",
-        "title": "Upgrade Server Infrastructure to Enhance Scalability",
-        "liked": false,
-        "type": "task",
-        "tags": ["server", "scalability"],
-        "due_date": "2025-03-20T15:00:00.000Z",
-        "days": ["all"],
-        "priority": "high"
-    },
-    {
-        "id": "24a4e7e3-056d-47ed-b79e-7a07014d3459",
-        "createdAt": "2024-12-23T10:10:00.000Z",
-        "updatedAt": "2024-12-23T10:10:00.000Z",
-        "title": "Develop Comprehensive Test Cases for Feature XYZ",
-        "liked": true,
-        "type": "task",
-        "tags": ["testing", "development"],
-        "due_date": "2025-03-25T08:00:00.000Z",
-        "days": ["tue", "thr"],
-        "priority": "high"
-    },
-    {
-        "id": "3a443493-0a40-44a9-b92f-55b3cd73b81f",
-        "createdAt": "2024-12-23T10:15:00.000Z",
-        "updatedAt": "2024-12-23T10:15:00.000Z",
-        "title": "Research Emerging Trends in AI for Business Applications",
-        "liked": false,
-        "type": "task",
-        "tags": ["research", "AI"],
-        "due_date": "2025-03-30T14:00:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "medium"
-    },
-    {
-        "id": "f925128b-bbe7-48e9-8bdc-9f146669be7e",
-        "createdAt": "2024-12-23T10:20:00.000Z",
-        "updatedAt": "2024-12-23T10:20:00.000Z",
-        "title": "Organize Team Workshop on Agile Methodologies",
-        "liked": true,
-        "type": "task",
-        "tags": ["workshop", "team"],
-        "due_date": "2025-04-05T10:30:00.000Z",
-        "days": ["all"],
-        "priority": "medium"
-    },
-    {
-        "id": "213ef34c-3393-40a1-b9db-1edb3f3d2e33",
-        "createdAt": "2024-12-23T10:25:00.000Z",
-        "updatedAt": "2024-12-23T10:25:00.000Z",
-        "title": "Enhance Accessibility Features for Mobile App",
-        "liked": false,
-        "type": "task",
-        "tags": ["accessibility", "mobile"],
-        "due_date": "2025-04-10T09:00:00.000Z",
-        "days": ["mon", "wed", "fri"],
-        "priority": "high"
-    },
-    {
-        "id": "2348d5cd-e7b9-43fc-8fc9-bf20953dcc70",
-        "createdAt": "2024-12-23T10:30:00.000Z",
-        "updatedAt": "2024-12-23T10:30:00.000Z",
-        "title": "Run A/B Testing on New Feature Implementation",
-        "liked": true,
-        "type": "task",
-        "tags": ["testing", "feature"],
-        "due_date": "2025-04-15T16:00:00.000Z",
-        "days": ["all"],
-        "priority": "medium"
-    },
-    {
-        "id": "043ac15e-b416-4070-ba4e-539e5158c0ce",
-        "createdAt": "2024-12-23T10:35:00.000Z",
-        "updatedAt": "2024-12-23T10:35:00.000Z",
-        "title": "Prepare Final Report for Q1 Project Deliverables",
-        "liked": false,
-        "type": "task",
-        "tags": ["report", "deliverables"],
-        "due_date": "2025-04-20T14:00:00.000Z",
-        "days": ["tue", "thr"],
-        "priority": "medium"
+        "due_date": "2025-12-15T09:30:00.000Z",
+        "days": ["mon", "wed"],
+        "priority": "medium",
+        "archived": true
     }
 ]

@@ -11,4 +11,5 @@ export type Task = {
     due_date: string;
     days: DayNameType[] | "all";
     priority: "low" | "medium" | "high" | "severe";
+    archived: boolean;
 };

@@ -6,12 +6,14 @@ import { customStorage } from "./PersistWrapper";
 interface AppState {
     darkMode: boolean;
     viewAll: boolean;
+    viewArchived: boolean;
     lastLoggedIn: string;
 }
 
 interface AppActions {
     toggleDarkMode(): void;
     toggleViewAll(): void;
+    toggleViewArchived(): void;
     setLastLoggedIn(lastLoggedIn: string): void;
 }
 
@@ -26,6 +28,11 @@ export const useConfigStore = create<AppState & AppActions>()(
             viewAll: false,
             toggleViewAll() {
                 return set((prev) => ({ viewAll: !prev.viewAll }));
+            },
+
+            viewArchived: false,
+            toggleViewArchived() {
+                return set((prev) => ({ viewArchived: !prev.viewArchived }));
             },
 
             lastLoggedIn: "",

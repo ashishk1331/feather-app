@@ -4,6 +4,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 import { RiseUp } from "@/constants/Animate";
+import { Routes } from "@/constants/Routes";
 import { useTheme } from "@/hooks/useTheme";
 import { useTaskStore } from "@/store/TaskStore";
 
@@ -27,15 +28,31 @@ export default function SelectionMenu() {
         });
     }
 
+    function archiveSelectedTasks() {
+        useTaskStore.setState((prev) => {
+            return {
+                tasks: prev.tasks.map((task) => {
+                    if (selectedTasks.has(task.id)) {
+                        task.archived = !task.archived;
+                    }
+                    return task;
+                }),
+                finished: prev.finished.filter((id) => !selectedTasks.has(id)),
+                selected: new Set(),
+            };
+        });
+    }
+
     function deleteSelectedTasks() {
         useTaskStore.setState((prev) => ({
             tasks: prev.tasks.filter((task) => !selectedTasks.has(task.id)),
+            finished: prev.finished.filter((id) => !selectedTasks.has(id)),
             selected: new Set(),
         }));
     }
 
     function jumpToAddForm() {
-        router.push("/add");
+        router.push(Routes.AddForm);
     }
 
     return (
@@ -72,6 +89,7 @@ export default function SelectionMenu() {
                                         styles.selectionButton,
                                         { backgroundColor: primary },
                                     ]}
+                                    onPress={archiveSelectedTasks}
                                 >
                                     <Feather
                                         name="archive"

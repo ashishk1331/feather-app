@@ -23,10 +23,16 @@ export function generateTask(
         days: daysOfWork,
         due_date: new Date().toJSON(),
         priority,
+        archived: false,
     };
 }
 
 export function sortTodayTasks(tasks: Task[]): Task[] {
+    // only show unarchived task
+    tasks = tasks.filter(
+        (task) => task.archived === undefined || !task.archived,
+    );
+
     const today = format(new Date(), "E").toLowerCase() as DayNameType;
     let validTasks = [];
     for (let task of tasks) {

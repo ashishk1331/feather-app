@@ -72,7 +72,7 @@ export const useFormStore = create<FormState & FormActions>()((set) => ({
     },
 
     reset() {
-        return set(initialState);
+        return set({ ...initialState, days: [] });
     },
 }));
 export { DayNameType };

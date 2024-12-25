@@ -8,9 +8,11 @@ import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
 
 // close selected tasks on view change
+// and viewArchived option as well
 useConfigStore.subscribe(({ viewAll }, { viewAll: prevViewAll }) => {
     if (viewAll !== prevViewAll) {
         useTaskStore.setState({ selected: new Set() });
+        useConfigStore.setState({ viewArchived: false });
     }
 });
 

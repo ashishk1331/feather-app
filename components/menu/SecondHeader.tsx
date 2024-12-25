@@ -1,8 +1,10 @@
 import { MotiView } from "moti";
 import { StyleSheet } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import { FadeIn } from "@/constants/Animate";
 import { useTheme } from "@/hooks/useTheme";
+import { useConfigStore } from "@/store/Config";
 
 import Feather from "@expo/vector-icons/Feather";
 
@@ -10,7 +12,12 @@ import Flex from "../layout/Flex";
 import Button from "../primitives/Button";
 
 export default function SecondHeader() {
-    const { primary } = useTheme();
+    const { primary, background } = useTheme();
+
+    const [viewArchived, toggleViewArchived] = useConfigStore(
+        useShallow((state) => [state.viewArchived, state.toggleViewArchived]),
+    );
+
     return (
         <Flex
             flexDirection="row"
@@ -20,10 +27,22 @@ export default function SecondHeader() {
         >
             <Button
                 variant="icon"
-                style={[styles.button, { backgroundColor: primary + "20" }]}
+                style={[
+                    styles.button,
+                    {
+                        backgroundColor: viewArchived
+                            ? primary
+                            : primary + "20",
+                    },
+                ]}
+                onPress={toggleViewArchived}
             >
                 <MotiView {...FadeIn}>
-                    <Feather name="archive" size={24} color={primary} />
+                    <Feather
+                        name="archive"
+                        size={24}
+                        color={viewArchived ? background : primary}
+                    />
                 </MotiView>
             </Button>
             <Button
