@@ -1,7 +1,9 @@
 import { router, usePathname } from "expo-router";
+import { AnimatePresence, MotiView } from "moti";
 import React from "react";
 import { StyleSheet } from "react-native";
 
+import { RiseUp } from "@/constants/Animate";
 import { useTheme } from "@/hooks/useTheme";
 import { useTaskStore } from "@/store/TaskStore";
 
@@ -43,50 +45,72 @@ export default function SelectionMenu() {
                 alignItems="center"
                 gap={6}
             >
-                {anySelectedTasks ? (
-                    <>
-                        <Button
-                            variant="icon"
-                            style={[
-                                styles.selectionButton,
-                                { backgroundColor: primary },
-                            ]}
-                            onPress={resetSelectedTasks}
-                        >
-                            <AntDesign name="close" size={24} color="#fff" />
-                        </Button>
-                        <Button
-                            variant="icon"
-                            style={[
-                                styles.selectionButton,
-                                { backgroundColor: primary },
-                            ]}
-                        >
-                            <AntDesign name="heart" size={24} color="#fff" />
-                        </Button>
-                        <Button
-                            variant="icon"
-                            style={[
-                                styles.selectionButton,
-                                { backgroundColor: warning },
-                            ]}
-                            onPress={deleteSelectedTasks}
-                        >
-                            <AntDesign name="delete" size={24} color="#fff" />
-                        </Button>
-                    </>
-                ) : (
-                    <Button
-                        variant="icon"
-                        style={[
-                            styles.selectionButton,
-                            { backgroundColor: primary },
-                        ]}
-                        onPress={jumpToAddForm}
-                    >
-                        <AntDesign name="plus" size={24} color="#fff" />
-                    </Button>
-                )}
+                <AnimatePresence>
+                    {anySelectedTasks ? (
+                        <>
+                            <MotiView {...RiseUp}>
+                                <Button
+                                    variant="icon"
+                                    style={[
+                                        styles.selectionButton,
+                                        { backgroundColor: primary },
+                                    ]}
+                                    onPress={resetSelectedTasks}
+                                >
+                                    <AntDesign
+                                        name="close"
+                                        size={24}
+                                        color="#fff"
+                                    />
+                                </Button>
+                            </MotiView>
+                            <MotiView {...RiseUp} transition={{ delay: 100 }}>
+                                <Button
+                                    variant="icon"
+                                    style={[
+                                        styles.selectionButton,
+                                        { backgroundColor: primary },
+                                    ]}
+                                >
+                                    <AntDesign
+                                        name="heart"
+                                        size={24}
+                                        color="#fff"
+                                    />
+                                </Button>
+                            </MotiView>
+                            <MotiView {...RiseUp} transition={{ delay: 200 }}>
+                                <Button
+                                    variant="icon"
+                                    style={[
+                                        styles.selectionButton,
+                                        { backgroundColor: warning },
+                                    ]}
+                                    onPress={deleteSelectedTasks}
+                                >
+                                    <AntDesign
+                                        name="delete"
+                                        size={24}
+                                        color="#fff"
+                                    />
+                                </Button>
+                            </MotiView>
+                        </>
+                    ) : (
+                        <MotiView {...RiseUp}>
+                            <Button
+                                variant="icon"
+                                style={[
+                                    styles.selectionButton,
+                                    { backgroundColor: primary },
+                                ]}
+                                onPress={jumpToAddForm}
+                            >
+                                <AntDesign name="plus" size={24} color="#fff" />
+                            </Button>
+                        </MotiView>
+                    )}
+                </AnimatePresence>
             </Flex>
         )
     );
