@@ -11,7 +11,7 @@ type ListProps = {
 };
 
 export default function List({ tasksToDisplay }: ListProps) {
-    return tasksToDisplay.length > 0 ? (
+    return (
         <FlatList
             style={styles.outer}
             data={tasksToDisplay}
@@ -22,9 +22,8 @@ export default function List({ tasksToDisplay }: ListProps) {
             ListFooterComponent={
                 tasksToDisplay.length > 10 ? <ListFooter /> : null
             }
+            ListEmptyComponent={<EmptyList />}
         />
-    ) : (
-        <EmptyList />
     );
 }
 

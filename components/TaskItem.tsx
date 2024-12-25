@@ -40,6 +40,7 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
             delay={index * 120}
             from={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
         >
             <Flex
                 style={[
@@ -69,10 +70,12 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                     <Text
                         style={[
                             {
-                                color: !finished ? color : color + "88",
-                                textDecorationLine: finished
-                                    ? "line-through"
-                                    : "none",
+                                color:
+                                    finished && !viewAll ? color + "88" : color,
+                                textDecorationLine:
+                                    finished && !viewAll
+                                        ? "line-through"
+                                        : "none",
                             },
                         ]}
                     >

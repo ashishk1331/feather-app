@@ -7,10 +7,18 @@ import { useColorScheme } from "react-native";
 import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
 
+// close selected tasks on view change
+useConfigStore.subscribe(({ viewAll }, { viewAll: prevViewAll }) => {
+    if (viewAll !== prevViewAll) {
+        useTaskStore.setState({ selected: new Set() });
+    }
+});
+
 export default function HomeLayout() {
     setStatusBarStyle(useColorScheme() ?? "light");
     const lastLoggedIn = useConfigStore((state) => state.lastLoggedIn);
 
+    // reset finished tasks on day change
     useEffect(() => {
         const now = new Date();
 

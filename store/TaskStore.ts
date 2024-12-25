@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import dummyTasks from "@/assets/tasks.json";
+// import dummyTasks from "@/assets/tasks.json";
 import { Task } from "@/types/task";
 
 import { customStorage } from "./PersistWrapper";
@@ -17,7 +17,7 @@ interface TaskState {
 export const useTaskStore = create<TaskState>()(
     persist(
         (set) => ({
-            tasks: dummyTasks.slice(0, 4) as Task[],
+            tasks: [],
             finished: [],
             toggleFinished(id) {
                 return set((prev) => ({
