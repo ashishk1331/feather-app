@@ -1,50 +1,31 @@
-# Welcome to your Expo app 👋
+## todo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+0. ✅ ~~statusbar color~~
+1. performance and scoped states for better rendering and re-rendering
+2. ✅ minification and tree-shaking of the code using esbuild
+3. tags and group based sorting
+4. progress for each day and week
+5. edit and due dates
+6. notifications and reminders
+7. subtasks and checklists
+8. one-time tasks and recurring tasks
+9. group via labels
+10. search and filter
+11. themes and customizations
+12. charts and analytics
+13. anatical insights around tasks and habits
+14. ✅ refresh finished list when diff in last logged in and today
 
-## Get started
+## Remember:
 
-1. Install dependencies
-
-    ```bash
-    npm install
-    ```
-
-2. Start the app
-
-    ```bash
-     npx expo start
-    ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+1. .aab to .apk
 
 ```bash
-npm run reset-project
+java -jar bundletool-all-1.15.0.jar build-apks --bundle=app-release.aab --output=app-release.apks --mode=universal
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. build app on eas
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+eas build --platform android
+```

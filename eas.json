@@ -12,12 +12,15 @@
         "preview": {
             "android": {
                 "buildType": "app-bundle"
-            }
+            },
+            "channel": "staging",
+            "distribution": "internal"
         },
         "production": {
             "android": {
                 "buildType": "app-bundle"
-            }
+            },
+            "channel": "production"
         }
     }
 }

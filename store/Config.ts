@@ -6,11 +6,13 @@ import { customStorage } from "./PersistWrapper";
 interface AppState {
     darkMode: boolean;
     viewAll: boolean;
+    lastLoggedIn: string;
 }
 
 interface AppActions {
     toggleDarkMode(): void;
     toggleViewAll(): void;
+    setLastLoggedIn(lastLoggedIn: string): void;
 }
 
 export const useConfigStore = create<AppState & AppActions>()(
@@ -25,11 +27,19 @@ export const useConfigStore = create<AppState & AppActions>()(
             toggleViewAll() {
                 return set((prev) => ({ viewAll: !prev.viewAll }));
             },
+
+            lastLoggedIn: "",
+            setLastLoggedIn(lastLoggedIn: string) {
+                return set({ lastLoggedIn });
+            },
         }),
         {
             name: "feather-config-store",
             storage: createJSONStorage(() => customStorage),
-            partialize: ({ darkMode }) => ({ darkMode }),
+            partialize: ({ darkMode, lastLoggedIn }) => ({
+                darkMode,
+                lastLoggedIn,
+            }),
         },
     ),
 );
