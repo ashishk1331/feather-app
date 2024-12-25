@@ -1,4 +1,5 @@
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
+import { useCallback } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 
 import DaySelect from "@/components/form/DaySelect";
@@ -22,6 +23,12 @@ export default function AddForm() {
     const setPriority = useFormStore((state) => state.setPriority);
 
     const addTask = useTaskStore((state) => state.addTask);
+
+    useFocusEffect(
+        useCallback(() => {
+            return resetForm;
+        }, []),
+    );
 
     function handleSubmit() {
         try {
