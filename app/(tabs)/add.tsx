@@ -24,6 +24,7 @@ export default function AddForm() {
 
     const addTask = useTaskStore((state) => state.addTask);
 
+    // resets form if out of focus
     useFocusEffect(
         useCallback(() => {
             return resetForm;
