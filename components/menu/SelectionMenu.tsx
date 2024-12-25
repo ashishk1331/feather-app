@@ -8,6 +8,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { useTaskStore } from "@/store/TaskStore";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Feather from "@expo/vector-icons/Feather";
 
 import Flex from "../layout/Flex";
 import Button from "../primitives/Button";
@@ -72,8 +73,8 @@ export default function SelectionMenu() {
                                         { backgroundColor: primary },
                                     ]}
                                 >
-                                    <AntDesign
-                                        name="heart"
+                                    <Feather
+                                        name="archive"
                                         size={24}
                                         color="#fff"
                                     />

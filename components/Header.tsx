@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { AnimatePresence } from "moti";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
@@ -11,6 +12,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import Flex from "./layout/Flex";
+import SecondHeader from "./menu/SecondHeader";
 import Button from "./primitives/Button";
 import Progress from "./primitives/Progress";
 import Text from "./primitives/Text";
@@ -54,54 +56,57 @@ export default function Header({ tasksToDisplayLength }: HeaderProps) {
     }, []);
 
     return (
-        <Flex
-            flexDirection="row"
-            justifyContent="space-between"
-            style={styles.outer}
-        >
-            <Flex flexDirection="column" gap={12}>
-                <Flex
-                    flexDirection="row"
-                    alignItems="center"
-                    justifyContent="flex-start"
-                    style={{ marginVertical: 6 }}
-                >
-                    <Button variant="icon" onPress={toggleDarkMode}>
-                        <FontAwesome
-                            name="circle"
-                            size={24}
-                            color={primaryColor}
-                        />
-                    </Button>
-                    <Text
-                        key={headline}
-                        style={{ fontSize: 24, fontWeight: "bold" }}
-                        animate="rolling"
+        <>
+            <Flex
+                flexDirection="row"
+                justifyContent="space-between"
+                style={styles.outer}
+            >
+                <Flex flexDirection="column" gap={12}>
+                    <Flex
+                        flexDirection="row"
+                        alignItems="center"
+                        justifyContent="flex-start"
+                        style={{ marginVertical: 6 }}
                     >
-                        {headline}
-                    </Text>
+                        <Button variant="icon" onPress={toggleDarkMode}>
+                            <FontAwesome
+                                name="circle"
+                                size={24}
+                                color={primaryColor}
+                            />
+                        </Button>
+                        <Text
+                            key={headline}
+                            style={{ fontSize: 24, fontWeight: "bold" }}
+                            animate="rolling"
+                        >
+                            {headline}
+                        </Text>
+                    </Flex>
+                    <Flex
+                        flexDirection="row"
+                        alignItems="center"
+                        gap={12}
+                        style={{ marginHorizontal: 6 }}
+                    >
+                        <Text>{today}</Text>
+                        <Progress widthPercentage={percentageComplete} />
+                        <Text key={prompt} animate="rolling">
+                            {prompt}
+                        </Text>
+                    </Flex>
                 </Flex>
-                <Flex
-                    flexDirection="row"
-                    alignItems="center"
-                    gap={12}
-                    style={{ marginHorizontal: 6 }}
-                >
-                    <Text>{today}</Text>
-                    <Progress widthPercentage={percentageComplete} />
-                    <Text key={prompt} animate="rolling">
-                        {prompt}
-                    </Text>
-                </Flex>
+                <Button variant="icon" onPress={toggleViewAll}>
+                    <FontAwesome6
+                        name={viewAll ? "folder-open" : "folder-closed"}
+                        size={24}
+                        color={viewAll ? primaryColor : textColor}
+                    />
+                </Button>
             </Flex>
-            <Button variant="icon" onPress={toggleViewAll}>
-                <FontAwesome6
-                    name={viewAll ? "folder-open" : "folder-closed"}
-                    size={24}
-                    color={viewAll ? primaryColor : textColor}
-                />
-            </Button>
-        </Flex>
+            <AnimatePresence>{viewAll && <SecondHeader />}</AnimatePresence>
+        </>
     );
 }
 

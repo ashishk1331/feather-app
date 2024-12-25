@@ -5,7 +5,7 @@
 2. ✅ minification and tree-shaking of the code using esbuild
 3. tags and group based sorting
 4. progress for each day and week
-5. edit and due dates
+5. edit feature and due dates
 6. notifications and reminders
 7. subtasks and checklists
 8. one-time tasks and recurring tasks
