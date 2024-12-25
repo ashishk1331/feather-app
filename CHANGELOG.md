@@ -1,5 +1,25 @@
 # feather
 
+## 1.2.0
+
+### Minor Changes
+
+- version 1.2
+
+    - refresh finished tasks everyday
+    - ability to archive tasks
+
+    bug fixes
+
+    - close selected tasks on view change
+    - close archived tasks on view change
+    - reset form when closed
+
+    ui
+
+    - animate bottom selection menu
+    - second header for extra features
+
 ## 1.1.0
 
 ### Minor Changes
