@@ -2,7 +2,9 @@ import { format } from "date-fns";
 import * as Crypto from "expo-crypto";
 
 import { DayNameType } from "@/types/days";
-import { Task } from "@/types/task";
+import { type Task } from "@/types/task";
+
+import { HideArchived, applyFilterOn } from "./filterPresets";
 
 export function generateTask(
     prompt: string,
@@ -29,9 +31,7 @@ export function generateTask(
 
 export function sortTodayTasks(tasks: Task[]): Task[] {
     // only show unarchived task
-    tasks = tasks.filter(
-        (task) => task.archived === undefined || !task.archived,
-    );
+    tasks = applyFilterOn(tasks, HideArchived);
 
     const today = format(new Date(), "E").toLowerCase() as DayNameType;
     let validTasks = [];

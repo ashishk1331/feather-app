@@ -6,13 +6,17 @@ import Text from "./Text";
 
 type PillProps = {
     text: string;
+    variant?: React.ComponentProps<typeof Text>["variant"];
     style?: StyleProp<TextStyle>;
 };
 
-export default function Pill({ text, style }: PillProps) {
+export default function Pill({ text, variant = "body", style }: PillProps) {
     const { primary } = useTheme();
     return (
-        <Text style={[styles.pill, { backgroundColor: primary + "20" }, style]}>
+        <Text
+            variant={variant}
+            style={[styles.pill, { backgroundColor: primary + "20" }, style]}
+        >
             {text}
         </Text>
     );
@@ -20,7 +24,6 @@ export default function Pill({ text, style }: PillProps) {
 
 const styles = StyleSheet.create({
     pill: {
-        fontSize: 12,
         paddingHorizontal: 12,
         paddingVertical: 4,
         borderRadius: 12,

@@ -1,5 +1,7 @@
 import { DayNameType } from "./days";
 
+export type Priority = "low" | "medium" | "high" | "severe";
+
 export type Task = {
     id: string;
     createdAt: string;
@@ -10,6 +12,6 @@ export type Task = {
     tags: string[];
     due_date: string;
     days: DayNameType[] | "all";
-    priority: "low" | "medium" | "high" | "severe";
+    priority: Priority;
     archived: boolean;
 };

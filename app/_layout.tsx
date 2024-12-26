@@ -12,7 +12,7 @@ import { useTaskStore } from "@/store/TaskStore";
 useConfigStore.subscribe(({ viewAll }, { viewAll: prevViewAll }) => {
     if (viewAll !== prevViewAll) {
         useTaskStore.setState({ selected: new Set() });
-        useConfigStore.setState({ viewArchived: false });
+        useConfigStore.setState({ viewArchived: false, viewFilters: false });
     }
 });
 

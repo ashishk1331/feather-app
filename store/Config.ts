@@ -1,20 +1,27 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+import { AvailableFilters } from "@/util/filterPresets";
+
 import { customStorage } from "./PersistWrapper";
 
 interface AppState {
     darkMode: boolean;
     viewAll: boolean;
     viewArchived: boolean;
+    viewFilters: boolean;
     lastLoggedIn: string;
+    appliedFilters: AvailableFilters[];
 }
 
 interface AppActions {
     toggleDarkMode(): void;
     toggleViewAll(): void;
     toggleViewArchived(): void;
+    toggleViewFilters(): void;
+    resetAppliedFilters(): void;
     setLastLoggedIn(lastLoggedIn: string): void;
+    toggleFilter(filterName: AvailableFilters): void;
 }
 
 export const useConfigStore = create<AppState & AppActions>()(
@@ -38,6 +45,31 @@ export const useConfigStore = create<AppState & AppActions>()(
             lastLoggedIn: "",
             setLastLoggedIn(lastLoggedIn: string) {
                 return set({ lastLoggedIn });
+            },
+
+            viewFilters: false,
+            toggleViewFilters() {
+                return set((prev) => ({ viewFilters: !prev.viewFilters }));
+            },
+            resetAppliedFilters() {
+                return set({ appliedFilters: [] });
+            },
+
+            appliedFilters: [],
+            toggleFilter(filterName) {
+                return set((prev) => {
+                    if (prev.appliedFilters.includes(filterName)) {
+                        return {
+                            appliedFilters: prev.appliedFilters.filter(
+                                (f) => f !== filterName,
+                            ),
+                        };
+                    }
+
+                    return {
+                        appliedFilters: [filterName, ...prev.appliedFilters],
+                    };
+                });
             },
         }),
         {

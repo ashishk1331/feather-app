@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { AnimatePresence } from "moti";
+import React from "react";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
@@ -12,6 +13,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import Flex from "./layout/Flex";
+import FilterSelection from "./menu/FilterSelection";
 import SecondHeader from "./menu/SecondHeader";
 import Button from "./primitives/Button";
 import Progress from "./primitives/Progress";
@@ -25,6 +27,7 @@ export default function Header({ tasksToDisplayLength }: HeaderProps) {
     const { primary: primaryColor, text: textColor } = useTheme();
 
     const viewAll = useConfigStore((state) => state.viewAll);
+    const viewFilters = useConfigStore((state) => state.viewFilters);
     const toggleViewAll = useConfigStore((state) => state.toggleViewAll);
     const toggleDarkMode = useConfigStore((state) => state.toggleDarkMode);
 
@@ -106,6 +109,9 @@ export default function Header({ tasksToDisplayLength }: HeaderProps) {
                 </Button>
             </Flex>
             <AnimatePresence>{viewAll && <SecondHeader />}</AnimatePresence>
+            <AnimatePresence>
+                {viewFilters && <FilterSelection />}
+            </AnimatePresence>
         </>
     );
 }

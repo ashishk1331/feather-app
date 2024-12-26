@@ -7,6 +7,7 @@ const brand = {
     priorityLow: "#10b981",
     priorityMedium: "#eab308",
     priorityHigh: "#f87171",
+    prioritySevere: "#e879f9",
 };
 
 export const Colors = {

@@ -4,6 +4,7 @@ import { StyleProp, View, ViewStyle } from "react-native";
 type FlexProps = {
     flex?: number;
     flexDirection?: ViewStyle["flexDirection"];
+    flexWrap?: ViewStyle["flexWrap"];
     justifyContent?: ViewStyle["justifyContent"];
     alignItems?: ViewStyle["alignItems"];
     alignSelf?: ViewStyle["alignSelf"];
@@ -16,6 +17,7 @@ type FlexProps = {
 const Flex: React.FC<FlexProps> = ({
     flex,
     flexDirection = "column",
+    flexWrap,
     justifyContent,
     alignItems,
     alignSelf,
@@ -35,6 +37,7 @@ const Flex: React.FC<FlexProps> = ({
                     alignItems,
                     alignSelf,
                     gap,
+                    flexWrap,
                 },
                 style,
             ]}

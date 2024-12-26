@@ -17,6 +17,9 @@ export default function SecondHeader() {
     const [viewArchived, toggleViewArchived] = useConfigStore(
         useShallow((state) => [state.viewArchived, state.toggleViewArchived]),
     );
+    const [viewFilters, toggleViewFilters] = useConfigStore(
+        useShallow((state) => [state.viewFilters, state.toggleViewFilters]),
+    );
 
     return (
         <Flex
@@ -50,7 +53,25 @@ export default function SecondHeader() {
                 style={[styles.button, { backgroundColor: primary + "20" }]}
             >
                 <MotiView {...FadeIn}>
-                    <Feather name="filter" size={24} color={primary} />
+                    <Feather name="tag" size={24} color={primary} />
+                </MotiView>
+            </Button>
+            <Button
+                variant="icon"
+                style={[
+                    styles.button,
+                    {
+                        backgroundColor: viewFilters ? primary : primary + "20",
+                    },
+                ]}
+                onPress={toggleViewFilters}
+            >
+                <MotiView {...FadeIn}>
+                    <Feather
+                        name="filter"
+                        size={24}
+                        color={viewFilters ? background : primary}
+                    />
                 </MotiView>
             </Button>
             <Button
