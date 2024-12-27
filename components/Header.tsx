@@ -14,6 +14,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import Flex from "./layout/Flex";
 import FilterSelection from "./menu/FilterSelection";
+import SearchBar from "./menu/SearchBar";
 import SecondHeader from "./menu/SecondHeader";
 import Button from "./primitives/Button";
 import Progress from "./primitives/Progress";
@@ -28,6 +29,7 @@ export default function Header({ tasksToDisplayLength }: HeaderProps) {
 
     const viewAll = useConfigStore((state) => state.viewAll);
     const viewFilters = useConfigStore((state) => state.viewFilters);
+    const viewSearch = useConfigStore((state) => state.viewSearch);
     const toggleViewAll = useConfigStore((state) => state.toggleViewAll);
     const toggleDarkMode = useConfigStore((state) => state.toggleDarkMode);
 
@@ -108,9 +110,10 @@ export default function Header({ tasksToDisplayLength }: HeaderProps) {
                     />
                 </Button>
             </Flex>
-            <AnimatePresence>{viewAll && <SecondHeader />}</AnimatePresence>
             <AnimatePresence>
-                {viewFilters && <FilterSelection />}
+                {viewAll && <SecondHeader key="second-header" />}
+                {viewFilters && <FilterSelection key="filter" />}
+                {viewSearch && <SearchBar key="search" />}
             </AnimatePresence>
         </>
     );

@@ -10,6 +10,7 @@ interface AppState {
     viewAll: boolean;
     viewArchived: boolean;
     viewFilters: boolean;
+    viewSearch: boolean;
     lastLoggedIn: string;
     appliedFilters: AvailableFilters[];
 }
@@ -19,6 +20,7 @@ interface AppActions {
     toggleViewAll(): void;
     toggleViewArchived(): void;
     toggleViewFilters(): void;
+    toggleViewSearch(): void;
     resetAppliedFilters(): void;
     setLastLoggedIn(lastLoggedIn: string): void;
     toggleFilter(filterName: AvailableFilters): void;
@@ -49,7 +51,10 @@ export const useConfigStore = create<AppState & AppActions>()(
 
             viewFilters: false,
             toggleViewFilters() {
-                return set((prev) => ({ viewFilters: !prev.viewFilters }));
+                return set((prev) => ({
+                    viewFilters: !prev.viewFilters,
+                    viewSearch: false,
+                }));
             },
             resetAppliedFilters() {
                 return set({ appliedFilters: [] });
@@ -70,6 +75,14 @@ export const useConfigStore = create<AppState & AppActions>()(
                         appliedFilters: [filterName, ...prev.appliedFilters],
                     };
                 });
+            },
+
+            viewSearch: false,
+            toggleViewSearch() {
+                return set((prev) => ({
+                    viewSearch: !prev.viewSearch,
+                    viewFilters: false,
+                }));
             },
         }),
         {

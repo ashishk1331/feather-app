@@ -5,14 +5,22 @@ import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 
 import { useConfigStore } from "@/store/Config";
+import { useFormStore } from "@/store/FormStore";
 import { useTaskStore } from "@/store/TaskStore";
 
 // close selected tasks on view change
 // and viewArchived option as well
-useConfigStore.subscribe(({ viewAll }, { viewAll: prevViewAll }) => {
-    if (viewAll !== prevViewAll) {
+useConfigStore.subscribe((cur, prev) => {
+    if (cur.viewAll !== prev.viewAll) {
         useTaskStore.setState({ selected: new Set() });
-        useConfigStore.setState({ viewArchived: false, viewFilters: false });
+        useConfigStore.setState({
+            viewArchived: false,
+            viewFilters: false,
+        });
+    }
+
+    if (cur.viewSearch !== prev.viewSearch) {
+        useFormStore.setState({ search: "" });
     }
 });
 

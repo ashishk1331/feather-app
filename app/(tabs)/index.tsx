@@ -6,8 +6,10 @@ import Header from "@/components/Header";
 import List from "@/components/List";
 import { useTheme } from "@/hooks/useTheme";
 import { useConfigStore } from "@/store/Config";
+import { useFormStore } from "@/store/FormStore";
 import { useTaskStore } from "@/store/TaskStore";
 import { subsetTasksWithFilters } from "@/util/filterPresets";
+import { searchThroughTasks } from "@/util/searchUtil";
 import { sortTodayTasks } from "@/util/taskUtil";
 
 export default function Page() {
@@ -20,6 +22,8 @@ export default function Page() {
             state.appliedFilters,
         ]),
     );
+
+    const search = useFormStore((state) => state.search);
 
     const tasks = useTaskStore((state) => state.tasks);
     const todayTasks = sortTodayTasks(tasks);
@@ -37,10 +41,15 @@ export default function Page() {
         appliedFilters,
     );
 
+    let tasksAfterSearch =
+        search.length > 0
+            ? searchThroughTasks(tasks, search)
+            : tasksAfterFilterApplied;
+
     return (
         <SafeAreaView style={{ flex: 1, padding: 12, backgroundColor }}>
             <Header tasksToDisplayLength={todayTasks.length} />
-            <List tasksToDisplay={tasksAfterFilterApplied} />
+            <List tasksToDisplay={tasksAfterSearch} />
         </SafeAreaView>
     );
 }

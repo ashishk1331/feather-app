@@ -8,7 +8,7 @@ import Text from "../primitives/Text";
 type InputFieldProps = {
     value: string;
     onChangeText(prompt: string): void;
-    label: string;
+    label?: string;
     placeholder?: string;
     followup?: string;
 };
@@ -23,7 +23,7 @@ export default function InputField({
     const { text: color } = useTheme();
     return (
         <Flex flex={1} flexDirection="column" gap={10}>
-            <Text>{label}</Text>
+            {label && <Text>{label}</Text>}
             <TextInput
                 cursorColor={color}
                 style={[styles.inputbox, { borderColor: color + "20", color }]}

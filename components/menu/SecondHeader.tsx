@@ -30,6 +30,9 @@ export default function SecondHeader() {
             state.appliedFilters,
         ]),
     );
+    const [viewSearch, toggleViewSearch] = useConfigStore(
+        useShallow((state) => [state.viewSearch, state.toggleViewSearch]),
+    );
 
     return (
         <Flex
@@ -101,10 +104,20 @@ export default function SecondHeader() {
             </Button>
             <Button
                 variant="icon"
-                style={[styles.button, { backgroundColor: primary + "20" }]}
+                style={[
+                    styles.button,
+                    {
+                        backgroundColor: viewSearch ? primary : primary + "20",
+                    },
+                ]}
+                onPress={toggleViewSearch}
             >
                 <MotiView {...FadeIn}>
-                    <Feather name="search" size={24} color={primary} />
+                    <Feather
+                        name="search"
+                        size={24}
+                        color={viewSearch ? background : primary}
+                    />
                 </MotiView>
             </Button>
         </Flex>

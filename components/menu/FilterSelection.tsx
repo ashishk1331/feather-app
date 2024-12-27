@@ -42,9 +42,9 @@ export default function FilterSelection() {
                         }}
                     />
                 </Button>
-                {filters.map((label, index) => (
+                {filters.map((label) => (
                     <Button
-                        key={index}
+                        key={label}
                         variant="icon"
                         style={{ paddingVertical: 0, paddingHorizontal: 0 }}
                         onPress={() => toggleFilter(label)}

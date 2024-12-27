@@ -95,7 +95,7 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                                 }}
                             />
                         )}
-                        <Pill text={format(new Date(task.due_date), "d MMM")} />
+                        {/*<Pill text={format(new Date(task.due_date), "d MMM")} />*/}
                         <Pill
                             text={task.priority}
                             style={{ backgroundColor: pillBg }}

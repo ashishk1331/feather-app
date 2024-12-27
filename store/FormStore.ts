@@ -8,12 +8,14 @@ interface FormState {
     prompt: string;
     days: DayNameType[];
     priority: Task["priority"];
+    search: string;
 }
 
 interface FormActions {
     setPrompt(newPrompt: string): void;
     toggleDay(dayName: DayNameType): void;
     setPriority(newPriority: Task["priority"]): void;
+    setSearch(search: string): void;
     reset(): void;
 }
 
@@ -52,6 +54,7 @@ const initialState: FormState = {
     prompt: "",
     days: [],
     priority: "low",
+    search: "",
 };
 
 export const useFormStore = create<FormState & FormActions>()((set) => ({
@@ -71,8 +74,11 @@ export const useFormStore = create<FormState & FormActions>()((set) => ({
         return set({ priority: newPriority });
     },
 
+    setSearch(search) {
+        return set({ search });
+    },
+
     reset() {
         return set({ ...initialState, days: [] });
     },
 }));
-export { DayNameType };
