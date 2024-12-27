@@ -7,7 +7,7 @@ import List from "@/components/List";
 import { useTheme } from "@/hooks/useTheme";
 import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
-import { FilterIndex, applyFilterOn } from "@/util/filterPresets";
+import { subsetTasksWithFilters } from "@/util/filterPresets";
 import { sortTodayTasks } from "@/util/taskUtil";
 
 export default function Page() {
@@ -32,18 +32,10 @@ export default function Page() {
             : normalTasks
         : todayTasks;
 
-    // apply filters by AND
-    let tasksAfterFilterApplied = appliedFilters.reduce(
-        (prev, curr) => applyFilterOn(prev, FilterIndex[curr]),
+    let tasksAfterFilterApplied = subsetTasksWithFilters(
         tasksToDisplay,
+        appliedFilters,
     );
-
-    // apply filters by OR
-    // const tasksAfterFilterApplied = tasksToDisplay.filter((task) =>
-    //     appliedFilters.some((filter) =>
-    //         applyFilterOn(task, FilterIndex[filter]),
-    //     ),
-    // );
 
     return (
         <SafeAreaView style={{ flex: 1, padding: 12, backgroundColor }}>

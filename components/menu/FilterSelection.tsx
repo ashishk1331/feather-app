@@ -50,7 +50,7 @@ export default function FilterSelection() {
                         onPress={() => toggleFilter(label)}
                     >
                         <Pill
-                            text={label}
+                            text={label === "all" ? "every day" : label}
                             style={{
                                 borderWidth: 1,
                                 borderColor: appliedFilters.includes(label)

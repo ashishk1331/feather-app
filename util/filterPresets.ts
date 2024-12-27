@@ -31,6 +31,12 @@ export const SeverePriority: Filter<"priority"> = {
     comparision: "expect",
 };
 
+export const EveryDay: Filter<"days"> = {
+    targetProp: "days",
+    includes: "all",
+    comparision: "includes",
+};
+
 export const OnMondays: Filter<"days"> = {
     targetProp: "days",
     includes: "mon",
@@ -79,6 +85,7 @@ export const FilterIndex: Record<string, Filter> = {
     high: HighPriority,
     severe: SeverePriority,
     hideArchived: HideArchived,
+    all: EveryDay,
     mon: OnMondays,
     tue: OnTuesdays,
     wed: OnWednesdays,
@@ -91,24 +98,40 @@ export const FilterIndex: Record<string, Filter> = {
 export type AvailableFilters = keyof typeof FilterIndex;
 
 export function applyFilterOn<T extends keyof Task>(
-    tasks: Task[] | Task,
+    tasks: Task[],
     filter: Filter<T>,
 ) {
-    if (Array.isArray(tasks)) {
-        return tasks.filter((task) => {
-            if (filter.comparision === "expect") {
-                return task[filter.targetProp] === filter.expect;
-            } else if (filter.comparision === "includes") {
-                return task[filter.targetProp].includes(filter.includes);
-            }
-            return false;
-        });
-    } else {
-        if (filter.comparision === "expect") {
-            return tasks[filter.targetProp] === filter.expect;
-        } else if (filter.comparision === "includes") {
-            return tasks[filter.targetProp].includes(filter.includes);
-        }
-        return false;
+    return tasks.filter((task) => applyFilterOnTask(task, filter));
+}
+
+function applyFilterOnTask(task: Task, filter: Filter) {
+    if (filter.comparision === "expect") {
+        return task[filter.targetProp] === filter.expect;
+    } else if (filter.comparision === "includes") {
+        return task[filter.targetProp].includes(filter.includes);
     }
+    return false;
+}
+
+export function subsetTasksWithFilters(
+    tasks: Task[],
+    filters: (keyof typeof FilterIndex)[],
+) {
+    if (filters.length < 1) {
+        return tasks;
+    }
+
+    const tasksToDisplay = [];
+
+    for (const task of tasks) {
+        if (
+            filters.some((filter) =>
+                applyFilterOnTask(task, FilterIndex[filter]),
+            )
+        ) {
+            tasksToDisplay.push(task);
+        }
+    }
+
+    return tasksToDisplay;
 }

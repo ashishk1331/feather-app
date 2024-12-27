@@ -2,9 +2,9 @@ import { Task } from "./task";
 
 export type Comparision = "expect" | "includes";
 
-export type Filter<T extends keyof Task> = {
-    targetProp: keyof Task;
-    expect?: Task[T];
-    includes?: Task[T] | Task[T][];
+export type Filter = {
+    targetProp: T extends keyof Task ? T : never;
+    expect?: string;
+    includes?: string | string[];
     comparision: Comparision;
 };

@@ -7,18 +7,28 @@ import { useTheme } from "@/hooks/useTheme";
 import { useConfigStore } from "@/store/Config";
 
 import Feather from "@expo/vector-icons/Feather";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 import Flex from "../layout/Flex";
 import Button from "../primitives/Button";
 
 export default function SecondHeader() {
-    const { primary, background } = useTheme();
+    const {
+        primary,
+        background,
+        text: color,
+        priorityLow: success,
+    } = useTheme();
 
     const [viewArchived, toggleViewArchived] = useConfigStore(
         useShallow((state) => [state.viewArchived, state.toggleViewArchived]),
     );
-    const [viewFilters, toggleViewFilters] = useConfigStore(
-        useShallow((state) => [state.viewFilters, state.toggleViewFilters]),
+    const [viewFilters, toggleViewFilters, appliedFilters] = useConfigStore(
+        useShallow((state) => [
+            state.viewFilters,
+            state.toggleViewFilters,
+            state.appliedFilters,
+        ]),
     );
 
     return (
@@ -61,17 +71,32 @@ export default function SecondHeader() {
                 style={[
                     styles.button,
                     {
-                        backgroundColor: viewFilters ? primary : primary + "20",
+                        backgroundColor: viewFilters
+                            ? primary
+                            : (appliedFilters.length > 0 ? success : primary) +
+                              "20",
                     },
                 ]}
                 onPress={toggleViewFilters}
             >
                 <MotiView {...FadeIn}>
-                    <Feather
-                        name="filter"
-                        size={24}
-                        color={viewFilters ? background : primary}
-                    />
+                    {appliedFilters.length > 0 ? (
+                        <MaterialIcons
+                            name={
+                                appliedFilters.length < 10
+                                    ? "filter-" + appliedFilters.length
+                                    : "filter-9-plus"
+                            }
+                            size={24}
+                            color={viewFilters ? background : primary}
+                        />
+                    ) : (
+                        <Feather
+                            name="filter"
+                            size={24}
+                            color={viewFilters ? background : primary}
+                        />
+                    )}
                 </MotiView>
             </Button>
             <Button
