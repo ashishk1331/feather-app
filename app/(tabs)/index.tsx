@@ -26,6 +26,7 @@ export default function Page() {
     const search = useFormStore((state) => state.search);
 
     const tasks = useTaskStore((state) => state.tasks);
+    // const deletedTasks = useTaskStore((state) => state.trash);
     const todayTasks = sortTodayTasks(tasks);
     const archivedTasks = tasks.filter((task) => task.archived);
     const normalTasks = tasks.filter((task) => !task.archived);
@@ -42,6 +43,9 @@ export default function Page() {
 
         // search through tasks
         (t) => (search.length > 0 ? searchThroughTasks(t, search) : t),
+
+        // also view deleted tasks
+        // (t) => [...t, ...deletedTasks],
     ]);
 
     return (

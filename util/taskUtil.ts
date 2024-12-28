@@ -10,6 +10,7 @@ export function generateTask(
     prompt: string,
     days: DayNameType[],
     priority: Task["priority"],
+    isOneTime: boolean,
 ): Task {
     const UUID = Crypto.randomUUID();
     const daysOfWork = days.includes("all") ? "all" : days;
@@ -26,6 +27,7 @@ export function generateTask(
         due_date: new Date().toJSON(),
         priority,
         archived: false,
+        isOneTime,
     };
 }
 
@@ -57,4 +59,10 @@ export function taskMutations(tasks: Task[], mutations: Mutation[]) {
         (prevTasks, mutation) => mutation(prevTasks),
         tasks,
     );
+}
+
+export function findOneTimeFinishedTaskIds(finished: string[], tasks: Task[]) {
+    return tasks
+        .filter((task) => finished.includes(task.id) && task.isOneTime)
+        .map((task) => task.id);
 }

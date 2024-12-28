@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 
 import DaySelect from "@/components/form/DaySelect";
 import InputField from "@/components/form/InputField";
+import OneTimeCheckbox from "@/components/form/OneTimeCheckbox";
 import PrioritySelection from "@/components/form/PrioritySelection";
 import Container from "@/components/layout/Container";
 import Flex from "@/components/layout/Flex";
@@ -21,6 +22,7 @@ export default function AddForm() {
     const resetForm = useFormStore((state) => state.reset);
     const priority = useFormStore((state) => state.priority);
     const setPriority = useFormStore((state) => state.setPriority);
+    const isOneTime = useFormStore((state) => state.isAOneTimeTask);
 
     const addTask = useTaskStore((state) => state.addTask);
 
@@ -33,7 +35,7 @@ export default function AddForm() {
 
     function handleSubmit() {
         try {
-            addTask(generateTask(prompt, days, priority));
+            addTask(generateTask(prompt, days, priority, isOneTime));
         } finally {
             resetForm();
             router.push("/");
@@ -68,6 +70,7 @@ export default function AddForm() {
                         priority={priority}
                         setPriority={setPriority}
                     />
+                    <OneTimeCheckbox />
                     <Flex
                         flex={1}
                         flexDirection="row"

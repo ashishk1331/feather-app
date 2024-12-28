@@ -14,4 +14,5 @@ export type Task = {
     days: DayNameType[] | "all";
     priority: Priority;
     archived: boolean;
+    isOneTime: boolean;
 };

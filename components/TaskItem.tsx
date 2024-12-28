@@ -99,6 +99,15 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                                 }}
                             />
                         )}
+                        {task.isOneTime && (
+                            <Pill
+                                text="1 time"
+                                style={{
+                                    backgroundColor:
+                                        colors.prioritySevere + "20",
+                                }}
+                            />
+                        )}
                         {/*<Pill text={format(new Date(task.due_date), "d MMM")} />*/}
                         <Pill
                             text={task.priority}

@@ -10,7 +10,7 @@ import Text from "../primitives/Text";
 
 type Priority = Task["priority"];
 
-const priorities: Priority[] = ["low", "medium", "high"];
+const priorities: Priority[] = ["low", "medium", "high", "severe"];
 
 type PrioritySelectionProps = {
     priority: Priority;
@@ -50,10 +50,7 @@ export default function PrioritySelection({
                     />
                 ))}
             </Flex>
-            <Text
-                style={{ color: color + "88", marginTop: 6 }}
-                variant="caption"
-            >
+            <Text style={{ color: color + "88" }} variant="caption">
                 Severity of the task
             </Text>
         </Flex>

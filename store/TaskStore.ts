@@ -12,6 +12,9 @@ interface TaskState {
     toggleFinished: (id: Task["id"]) => void;
     selected: Set<string>;
     addTask: (task: Task) => void;
+    trash: Task[];
+    addTasksToTrash(task: Task): void;
+    extendTasksToTrash(tasks: Task[]): void;
 }
 
 export const useTaskStore = create<TaskState>()(
@@ -30,11 +33,23 @@ export const useTaskStore = create<TaskState>()(
             addTask(task) {
                 return set((prev) => ({ tasks: [task, ...prev.tasks] }));
             },
+
+            trash: [],
+            addTasksToTrash(task) {
+                return set((prev) => ({ trash: [task, ...prev.trash] }));
+            },
+            extendTasksToTrash(tasks) {
+                return set((prev) => ({ trash: [...tasks, ...prev.trash] }));
+            },
         }),
         {
             name: "task-storage",
             storage: createJSONStorage(() => customStorage),
-            partialize: ({ tasks, finished }) => ({ tasks, finished }),
+            partialize: ({ tasks, finished, trash }) => ({
+                tasks,
+                finished,
+                trash,
+            }),
         },
     ),
 );

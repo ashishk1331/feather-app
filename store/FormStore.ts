@@ -8,6 +8,7 @@ interface FormState {
     prompt: string;
     days: DayNameType[];
     priority: Task["priority"];
+    isAOneTimeTask: boolean;
     search: string;
 }
 
@@ -16,6 +17,7 @@ interface FormActions {
     toggleDay(dayName: DayNameType): void;
     setPriority(newPriority: Task["priority"]): void;
     setSearch(search: string): void;
+    toggleOneTimeTask(): void;
     reset(): void;
 }
 
@@ -55,6 +57,7 @@ const initialState: FormState = {
     days: [],
     priority: "low",
     search: "",
+    isAOneTimeTask: false,
 };
 
 export const useFormStore = create<FormState & FormActions>()((set) => ({
@@ -80,5 +83,9 @@ export const useFormStore = create<FormState & FormActions>()((set) => ({
 
     reset() {
         return set({ ...initialState, days: [] });
+    },
+
+    toggleOneTimeTask() {
+        return set((prev) => ({ isAOneTimeTask: !prev.isAOneTimeTask }));
     },
 }));

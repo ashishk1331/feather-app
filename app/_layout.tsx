@@ -7,6 +7,7 @@ import { useColorScheme } from "react-native";
 import { useConfigStore } from "@/store/Config";
 import { useFormStore } from "@/store/FormStore";
 import { useTaskStore } from "@/store/TaskStore";
+import { findOneTimeFinishedTaskIds } from "@/util/taskUtil";
 
 // close selected tasks on view change
 // and viewArchived option as well
@@ -24,6 +25,20 @@ useConfigStore.subscribe((cur, prev) => {
     }
 });
 
+// move deleted tasks to trash
+useTaskStore.subscribe((cur, prev) => {
+    if (cur.tasks.length !== prev.tasks.length) {
+        const curIDs = cur.tasks.map((task) => task.id);
+
+        useTaskStore.setState({
+            trash: [
+                ...prev.tasks.filter((task) => !curIDs.includes(task.id)),
+                ...prev.trash,
+            ],
+        });
+    }
+});
+
 export default function HomeLayout() {
     setStatusBarStyle(useColorScheme() ?? "light");
     const lastLoggedIn = useConfigStore((state) => state.lastLoggedIn);
@@ -36,7 +51,19 @@ export default function HomeLayout() {
             useConfigStore.setState({ lastLoggedIn: now.toISOString() });
         } else if (Math.abs(differenceInCalendarDays(now, lastLoggedIn)) > 0) {
             useConfigStore.setState({ lastLoggedIn: now.toISOString() });
-            useTaskStore.setState({ finished: [] });
+            useTaskStore.setState((prev) => {
+                const oneTimeFinishedTaskIds = findOneTimeFinishedTaskIds(
+                    prev.finished,
+                    prev.tasks,
+                );
+
+                return {
+                    finished: [],
+                    tasks: prev.tasks.filter(
+                        (task) => !oneTimeFinishedTaskIds.includes(task.id),
+                    ),
+                };
+            });
         }
     }, []);
 

@@ -51,10 +51,7 @@ export default function DaySelect({ days, toggleDay }: DaySelectProps) {
                     />
                 ))}
             </Flex>
-            <Text
-                style={{ color: color + "88", marginTop: 6 }}
-                variant="caption"
-            >
+            <Text style={{ color: color + "88" }} variant="caption">
                 Select days when to perform the task
             </Text>
         </Flex>
