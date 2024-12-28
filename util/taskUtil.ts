@@ -49,3 +49,12 @@ export function sortTodayTasks(tasks: Task[]): Task[] {
 export function captilize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+type Mutation = (tasks: Task[]) => Task[];
+
+export function taskMutations(tasks: Task[], mutations: Mutation[]) {
+    return mutations.reduce(
+        (prevTasks, mutation) => mutation(prevTasks),
+        tasks,
+    );
+}

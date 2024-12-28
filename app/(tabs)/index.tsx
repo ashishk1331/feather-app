@@ -10,7 +10,7 @@ import { useFormStore } from "@/store/FormStore";
 import { useTaskStore } from "@/store/TaskStore";
 import { subsetTasksWithFilters } from "@/util/filterPresets";
 import { searchThroughTasks } from "@/util/searchUtil";
-import { sortTodayTasks } from "@/util/taskUtil";
+import { sortTodayTasks, taskMutations } from "@/util/taskUtil";
 
 export default function Page() {
     const { background: backgroundColor } = useTheme();
@@ -30,26 +30,24 @@ export default function Page() {
     const archivedTasks = tasks.filter((task) => task.archived);
     const normalTasks = tasks.filter((task) => !task.archived);
 
-    const tasksToDisplay = viewAll
-        ? viewArchived
-            ? archivedTasks
-            : normalTasks
-        : todayTasks;
+    const tasksToDisplay = taskMutations(tasks, [
+        // view archived or normal tasks
+        (t) => (viewArchived ? archivedTasks : normalTasks),
 
-    let tasksAfterFilterApplied = subsetTasksWithFilters(
-        tasksToDisplay,
-        appliedFilters,
-    );
+        // find tasks for today
+        (t) => (viewAll ? t : todayTasks),
 
-    let tasksAfterSearch =
-        search.length > 0
-            ? searchThroughTasks(tasks, search)
-            : tasksAfterFilterApplied;
+        // apply filters to the tasks
+        (t) => subsetTasksWithFilters(t, appliedFilters),
+
+        // search through tasks
+        (t) => (search.length > 0 ? searchThroughTasks(t, search) : t),
+    ]);
 
     return (
         <SafeAreaView style={{ flex: 1, padding: 12, backgroundColor }}>
             <Header tasksToDisplayLength={todayTasks.length} />
-            <List tasksToDisplay={tasksAfterSearch} />
+            <List tasksToDisplay={tasksToDisplay} />
         </SafeAreaView>
     );
 }
