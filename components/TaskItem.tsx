@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import { MotiView } from "moti";
 import { StyleSheet } from "react-native";
 
@@ -46,7 +45,12 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                 style={[
                     styles.box,
                     {
-                        borderColor: isSelected ? color : color + "20",
+                        borderColor: isSelected
+                            ? colors.primary + "44"
+                            : colors.icon + "20",
+                        backgroundColor: isSelected
+                            ? colors.primary + "05"
+                            : "transparent",
                     },
                 ]}
                 flexDirection="row"

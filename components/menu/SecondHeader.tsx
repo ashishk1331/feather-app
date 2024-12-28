@@ -8,6 +8,7 @@ import { useConfigStore } from "@/store/Config";
 
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Octicons from "@expo/vector-icons/Octicons";
 
 import Flex from "../layout/Flex";
 import Button from "../primitives/Button";
@@ -39,6 +40,7 @@ export default function SecondHeader() {
             flexDirection="row"
             gap={12}
             alignItems="center"
+            flexWrap="wrap"
             style={styles.outer}
         >
             <Button
@@ -67,6 +69,14 @@ export default function SecondHeader() {
             >
                 <MotiView {...FadeIn}>
                     <Feather name="tag" size={24} color={primary} />
+                </MotiView>
+            </Button>
+            <Button
+                variant="icon"
+                style={[styles.button, { backgroundColor: primary + "20" }]}
+            >
+                <MotiView {...FadeIn}>
+                    <Octicons name="graph" size={24} color={primary} />
                 </MotiView>
             </Button>
             <Button

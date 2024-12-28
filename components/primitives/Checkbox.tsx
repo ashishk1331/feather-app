@@ -15,13 +15,17 @@ export default function Checkbox({
     isFinished = false,
     toggleFinishStatus,
 }: CheckboxProps) {
-    const { primary, background: backgroundColor, text: color } = useTheme();
+    const {
+        primary,
+        background: backgroundColor,
+        icon: iconColor,
+    } = useTheme();
     return (
         <Pressable
             style={[
                 styles.checkbox,
                 {
-                    borderColor: color + "44",
+                    borderColor: isFinished ? primary : iconColor + "44",
                     backgroundColor: isFinished ? primary : backgroundColor,
                 },
             ]}
@@ -44,10 +48,4 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    // selected: {
-    //     backgroundColor: "#865dff",
-    // },
-    // deselected: {
-    //     borderColor: "#a3a3a3",
-    // },
 });

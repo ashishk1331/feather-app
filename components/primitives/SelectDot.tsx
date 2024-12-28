@@ -9,7 +9,7 @@ type SelectDotProps = {
 };
 
 export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
-    const { text: color } = useTheme();
+    const { primary, icon } = useTheme();
     function toggleSelectedStatus(id: string) {
         useTaskStore.setState((prev) => {
             const updateSelected = new Set(prev.selected);
@@ -34,7 +34,9 @@ export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
             <View
                 style={[
                     styles.checkbox,
-                    { backgroundColor: isSelected ? color : color + "44" },
+                    {
+                        backgroundColor: isSelected ? primary : icon + "44",
+                    },
                     isSelected ? styles.selected : styles.deselected,
                 ]}
             />
