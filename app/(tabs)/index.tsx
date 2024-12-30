@@ -26,14 +26,14 @@ export default function Page() {
     const search = useFormStore((state) => state.search);
 
     const tasks = useTaskStore((state) => state.tasks);
-    // const deletedTasks = useTaskStore((state) => state.trash);
     const todayTasks = sortTodayTasks(tasks);
-    const archivedTasks = tasks.filter((task) => task.archived);
-    const normalTasks = tasks.filter((task) => !task.archived);
 
     const tasksToDisplay = taskMutations(tasks, [
         // view archived or normal tasks
-        (t) => (viewArchived ? archivedTasks : normalTasks),
+        (t) =>
+            viewArchived
+                ? t.filter((task) => task.archived)
+                : t.filter((task) => !task.archived),
 
         // find tasks for today
         (t) => (viewAll ? t : todayTasks),
@@ -45,7 +45,7 @@ export default function Page() {
         (t) => (search.length > 0 ? searchThroughTasks(t, search) : t),
 
         // also view deleted tasks
-        // (t) => [...t, ...deletedTasks],
+        // (t) => [...t, ...useTaskStore.getState().trash],
     ]);
 
     return (

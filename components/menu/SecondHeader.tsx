@@ -136,7 +136,7 @@ export default function SecondHeader() {
 
 const styles = StyleSheet.create({
     outer: {
-        marginTop: 6,
+        marginVertical: 6,
     },
     button: {
         flex: 1,

@@ -1,6 +1,8 @@
+import { MotiView } from "moti";
 import { StyleSheet, TextInput } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
+import { FadeIn } from "@/constants/Animate";
 import { useTheme } from "@/hooks/useTheme";
 import { useFormStore } from "@/store/FormStore";
 
@@ -12,16 +14,21 @@ export default function SearchBar() {
         useShallow((state) => [state.search, state.setSearch]),
     );
     return (
-        <Flex flexDirection="column" gap={6} style={styles.container}>
-            <TextInput
-                cursorColor={color}
-                style={[styles.inputbox, { borderColor: icon + "20", color }]}
-                value={search}
-                onChangeText={setSearch}
-                placeholder="search task"
-                placeholderTextColor={icon + "88"}
-            />
-        </Flex>
+        <MotiView {...FadeIn}>
+            <Flex flexDirection="column" gap={6} style={styles.container}>
+                <TextInput
+                    cursorColor={color}
+                    style={[
+                        styles.inputbox,
+                        { borderColor: icon + "20", color },
+                    ]}
+                    value={search}
+                    onChangeText={setSearch}
+                    placeholder="search task"
+                    placeholderTextColor={icon + "88"}
+                />
+            </Flex>
+        </MotiView>
     );
 }
 

@@ -14,6 +14,7 @@ export default function OneTimeCheckbox() {
         primary,
         icon: iconColor,
         background: backgroundColor,
+        text: color,
     } = useTheme();
     const [isAOneTimeTask, toggleOneTimeTask] = useFormStore(
         useShallow((state) => [state.isAOneTimeTask, state.toggleOneTimeTask]),
@@ -46,7 +47,7 @@ export default function OneTimeCheckbox() {
                     gap={6}
                 >
                     <Text>Is it a one time task?</Text>
-                    <Text variant="caption">
+                    <Text variant="caption" style={{ color: color + "88" }}>
                         Or else it would be a recurring task.
                     </Text>
                 </Flex>

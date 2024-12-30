@@ -65,6 +65,11 @@ export default function HomeLayout() {
                 };
             });
         }
+
+        // cheat to reset lastloggedIn
+        // useConfigStore.setState({
+        //     lastLoggedIn: new Date(2014, 2, 3).toJSON(),
+        // });
     }, []);
 
     return (

@@ -112,8 +112,11 @@ export default function Header({ tasksToDisplayLength }: HeaderProps) {
             </Flex>
             <AnimatePresence>
                 {viewAll && <SecondHeader key="second-header" />}
-                {viewFilters && <FilterSelection key="filter" />}
-                {viewSearch && <SearchBar key="search" />}
+                {viewFilters ? (
+                    <FilterSelection key="filter" />
+                ) : viewSearch ? (
+                    <SearchBar key="search" />
+                ) : null}
             </AnimatePresence>
         </>
     );
