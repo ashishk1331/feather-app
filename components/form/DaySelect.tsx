@@ -1,8 +1,11 @@
 import { StyleSheet } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import { DayNames } from "@/constants/Days";
+
 import { useTheme } from "@/hooks/useTheme";
-import { DayNameType } from "@/types/days";
+
+import { useFormStore } from "@/store/FormStore";
 
 import Flex from "../layout/Flex";
 import Button from "../primitives/Button";
@@ -11,13 +14,12 @@ import Text from "../primitives/Text";
 const firstRow = DayNames.slice(0, 4);
 const secondRow = DayNames.slice(4);
 
-type DaySelectProps = {
-    days: DayNameType[];
-    toggleDay(dayName: DayNameType): void;
-};
-
-export default function DaySelect({ days, toggleDay }: DaySelectProps) {
+export default function DaySelect() {
     const { text: color } = useTheme();
+    const [days, toggleDay] = useFormStore(
+        useShallow((state) => [state.days, state.toggleDay]),
+    );
+
     return (
         <Flex gap={12}>
             <Text>days</Text>

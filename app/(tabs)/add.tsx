@@ -6,23 +6,21 @@ import DaySelect from "@/components/form/DaySelect";
 import InputField from "@/components/form/InputField";
 import OneTimeCheckbox from "@/components/form/OneTimeCheckbox";
 import PrioritySelection from "@/components/form/PrioritySelection";
+import TagsSelection from "@/components/form/TagsSelection";
 import Container from "@/components/layout/Container";
 import Flex from "@/components/layout/Flex";
 import Button from "@/components/primitives/Button";
 import Text from "@/components/primitives/Text";
-import { useFormStore } from "@/store/FormStore";
-import { useTaskStore } from "@/store/TaskStore";
+
 import { generateTask } from "@/util/taskUtil";
 
+import { useFormStore } from "@/store/FormStore";
+import { useTaskStore } from "@/store/TaskStore";
+
 export default function AddForm() {
-    const days = useFormStore((state) => state.days);
-    const toggleDay = useFormStore((state) => state.toggleDay);
     const prompt = useFormStore((state) => state.prompt);
     const setPrompt = useFormStore((state) => state.setPrompt);
     const resetForm = useFormStore((state) => state.reset);
-    const priority = useFormStore((state) => state.priority);
-    const setPriority = useFormStore((state) => state.setPriority);
-    const isOneTime = useFormStore((state) => state.isAOneTimeTask);
 
     const addTask = useTaskStore((state) => state.addTask);
 
@@ -33,14 +31,21 @@ export default function AddForm() {
         }, []),
     );
 
-    function handleSubmit() {
+    const handleSubmit = useCallback(function () {
         try {
-            addTask(generateTask(prompt, days, priority, isOneTime));
+            const {
+                prompt,
+                days,
+                priority,
+                tags,
+                isAOneTimeTask: isOneTime,
+            } = useFormStore.getState();
+            addTask(generateTask(prompt, days, priority, tags, isOneTime));
         } finally {
             resetForm();
             router.push("/");
         }
-    }
+    }, []);
 
     function goBack() {
         router.back();
@@ -65,11 +70,9 @@ export default function AddForm() {
                         placeholder="type here..."
                         followup="Use @ to highlight words."
                     />
-                    <DaySelect days={days} toggleDay={toggleDay} />
-                    <PrioritySelection
-                        priority={priority}
-                        setPriority={setPriority}
-                    />
+                    <DaySelect />
+                    <PrioritySelection />
+                    <TagsSelection />
                     <OneTimeCheckbox />
                     <Flex
                         flex={1}
@@ -98,6 +101,7 @@ export default function AddForm() {
 const styles = StyleSheet.create({
     outerPadding: {
         paddingHorizontal: 6,
+        paddingBottom: 48,
     },
     button: {
         width: "48%",

@@ -1,25 +1,24 @@
+import { router } from "expo-router";
 import { MotiView } from "moti";
 import { StyleSheet } from "react-native";
 import { useShallow } from "zustand/react/shallow";
-
-import { FadeIn } from "@/constants/Animate";
-import { useTheme } from "@/hooks/useTheme";
-import { useConfigStore } from "@/store/Config";
 
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 
+import { FadeIn } from "@/constants/Animate";
+import { Routes } from "@/constants/Routes";
+
+import { useTheme } from "@/hooks/useTheme";
+
+import { useConfigStore } from "@/store/Config";
+
 import Flex from "../layout/Flex";
 import Button from "../primitives/Button";
 
 export default function SecondHeader() {
-    const {
-        primary,
-        background,
-        text: color,
-        priorityLow: success,
-    } = useTheme();
+    const { primary, background, priorityLow: success } = useTheme();
 
     const [viewArchived, toggleViewArchived] = useConfigStore(
         useShallow((state) => [state.viewArchived, state.toggleViewArchived]),
@@ -34,6 +33,10 @@ export default function SecondHeader() {
     const [viewSearch, toggleViewSearch] = useConfigStore(
         useShallow((state) => [state.viewSearch, state.toggleViewSearch]),
     );
+
+    function jumpToTags() {
+        router.push(Routes.TagsPage);
+    }
 
     return (
         <Flex
@@ -66,6 +69,7 @@ export default function SecondHeader() {
             <Button
                 variant="icon"
                 style={[styles.button, { backgroundColor: primary + "20" }]}
+                onPress={jumpToTags}
             >
                 <MotiView {...FadeIn}>
                     <Feather name="tag" size={24} color={primary} />

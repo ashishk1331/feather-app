@@ -1,8 +1,13 @@
 import { StyleSheet } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import { useTheme } from "@/hooks/useTheme";
-import { Task } from "@/types/task";
+
 import { captilize } from "@/util/taskUtil";
+
+import { useFormStore } from "@/store/FormStore";
+
+import { Task } from "@/types/task";
 
 import Flex from "../layout/Flex";
 import Button from "../primitives/Button";
@@ -12,16 +17,11 @@ type Priority = Task["priority"];
 
 const priorities: Priority[] = ["low", "medium", "high", "severe"];
 
-type PrioritySelectionProps = {
-    priority: Priority;
-    setPriority(priority: Priority): void;
-};
-
-export default function PrioritySelection({
-    priority,
-    setPriority,
-}: PrioritySelectionProps) {
+export default function PrioritySelection() {
     const { text: color, ...colors } = useTheme();
+    const [priority, setPriority] = useFormStore(
+        useShallow((state) => [state.priority, state.setPriority]),
+    );
 
     return (
         <Flex gap={12}>

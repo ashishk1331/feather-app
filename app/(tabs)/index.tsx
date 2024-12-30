@@ -4,26 +4,27 @@ import { useShallow } from "zustand/react/shallow";
 
 import Header from "@/components/Header";
 import List from "@/components/List";
+
 import { useTheme } from "@/hooks/useTheme";
-import { useConfigStore } from "@/store/Config";
-import { useFormStore } from "@/store/FormStore";
-import { useTaskStore } from "@/store/TaskStore";
+
 import { subsetTasksWithFilters } from "@/util/filterPresets";
 import { searchThroughTasks } from "@/util/searchUtil";
 import { sortTodayTasks, taskMutations } from "@/util/taskUtil";
 
+import { useConfigStore } from "@/store/Config";
+import { useTaskStore } from "@/store/TaskStore";
+
 export default function Page() {
     const { background: backgroundColor } = useTheme();
 
-    const [viewAll, viewArchived, appliedFilters] = useConfigStore(
+    const [search, viewAll, viewArchived, appliedFilters] = useConfigStore(
         useShallow((state) => [
+            state.search,
             state.viewAll,
             state.viewArchived,
             state.appliedFilters,
         ]),
     );
-
-    const search = useFormStore((state) => state.search);
 
     const tasks = useTaskStore((state) => state.tasks);
     const todayTasks = sortTodayTasks(tasks);

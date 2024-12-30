@@ -13,6 +13,8 @@ interface AppState {
     viewSearch: boolean;
     lastLoggedIn: string;
     appliedFilters: AvailableFilters[];
+    search: string;
+    tags: string[];
 }
 
 interface AppActions {
@@ -23,6 +25,7 @@ interface AppActions {
     toggleViewSearch(): void;
     resetAppliedFilters(): void;
     setLastLoggedIn(lastLoggedIn: string): void;
+    setSearch(search: string): void;
     toggleFilter(filterName: AvailableFilters): void;
 }
 
@@ -47,6 +50,11 @@ export const useConfigStore = create<AppState & AppActions>()(
             lastLoggedIn: "",
             setLastLoggedIn(lastLoggedIn: string) {
                 return set({ lastLoggedIn });
+            },
+
+            search: "",
+            setSearch(search) {
+                return set({ search });
             },
 
             viewFilters: false,
@@ -84,13 +92,16 @@ export const useConfigStore = create<AppState & AppActions>()(
                     viewFilters: false,
                 }));
             },
+
+            tags: ["lovely", "handsome", "fire"],
         }),
         {
             name: "feather-config-store",
             storage: createJSONStorage(() => customStorage),
-            partialize: ({ darkMode, lastLoggedIn }) => ({
+            partialize: ({ darkMode, lastLoggedIn, tags }) => ({
                 darkMode,
                 lastLoggedIn,
+                tags,
             }),
         },
     ),

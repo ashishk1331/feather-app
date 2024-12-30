@@ -10,6 +10,7 @@ export function generateTask(
     prompt: string,
     days: DayNameType[],
     priority: Task["priority"],
+    tags: string[],
     isOneTime: boolean,
 ): Task {
     const UUID = Crypto.randomUUID();
@@ -22,7 +23,7 @@ export function generateTask(
         title: prompt,
         liked: false,
         type: "task",
-        tags: [],
+        tags,
         days: daysOfWork,
         due_date: new Date().toJSON(),
         priority,
@@ -36,8 +37,8 @@ export function sortTodayTasks(tasks: Task[]): Task[] {
     tasks = applyFilterOn(tasks, HideArchived);
 
     const today = format(new Date(), "E").toLowerCase() as DayNameType;
-    let validTasks = [];
-    for (let task of tasks) {
+    const validTasks = [];
+    for (const task of tasks) {
         if (
             (Array.isArray(task.days) && task.days.includes(today)) ||
             task.days === "all"

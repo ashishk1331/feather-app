@@ -3,14 +3,16 @@ import { StyleSheet, TextInput } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
 import { FadeIn } from "@/constants/Animate";
+
 import { useTheme } from "@/hooks/useTheme";
-import { useFormStore } from "@/store/FormStore";
+
+import { useConfigStore } from "@/store/Config";
 
 import Flex from "../layout/Flex";
 
 export default function SearchBar() {
     const { text: color, icon } = useTheme();
-    const [search, setSearch] = useFormStore(
+    const [search, setSearch] = useConfigStore(
         useShallow((state) => [state.search, state.setSearch]),
     );
     return (

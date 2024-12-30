@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 import { DayNames } from "@/constants/Days";
+
 import { type DayNameType } from "@/types/days";
 import { Task } from "@/types/task";
 
@@ -9,15 +10,15 @@ interface FormState {
     days: DayNameType[];
     priority: Task["priority"];
     isAOneTimeTask: boolean;
-    search: string;
+    tags: string[];
 }
 
 interface FormActions {
     setPrompt(newPrompt: string): void;
     toggleDay(dayName: DayNameType): void;
     setPriority(newPriority: Task["priority"]): void;
-    setSearch(search: string): void;
     toggleOneTimeTask(): void;
+    toggleTag(tag: string): void;
     reset(): void;
 }
 
@@ -29,7 +30,7 @@ function checkOrAddDay<T extends DayNameType[], V extends DayNameType>(
         if (days.includes("all")) {
             days = [] as unknown as T;
         } else {
-            for (let day of DayNames) {
+            for (const day of DayNames) {
                 if (!days.includes(day)) {
                     days.push(day);
                 }
@@ -56,8 +57,8 @@ const initialState: FormState = {
     prompt: "",
     days: [],
     priority: "low",
-    search: "",
     isAOneTimeTask: false,
+    tags: [],
 };
 
 export const useFormStore = create<FormState & FormActions>()((set) => ({
@@ -77,8 +78,12 @@ export const useFormStore = create<FormState & FormActions>()((set) => ({
         return set({ priority: newPriority });
     },
 
-    setSearch(search) {
-        return set({ search });
+    toggleTag(tag) {
+        return set((prev) => ({
+            tags: prev.tags.includes(tag)
+                ? prev.tags.filter((ptag) => ptag !== tag)
+                : [tag, ...prev.tags],
+        }));
     },
 
     reset() {

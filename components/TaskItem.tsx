@@ -2,10 +2,13 @@ import { MotiView } from "moti";
 import { StyleSheet } from "react-native";
 
 import { useTheme } from "@/hooks/useTheme";
+
+import { captilize } from "@/util/taskUtil";
+
 import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
+
 import { Task } from "@/types/task";
-import { captilize } from "@/util/taskUtil";
 
 import Flex from "./layout/Flex";
 import Checkbox from "./primitives/Checkbox";
@@ -113,6 +116,9 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                             text={task.priority}
                             style={{ backgroundColor: pillBg }}
                         />
+                        {task.tags.map((label) => (
+                            <Pill key={label} text={label} />
+                        ))}
                         {viewAll &&
                             (task.days === "all" ? (
                                 <Pill text="every day" />
