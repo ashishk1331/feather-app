@@ -100,6 +100,7 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                                 style={{
                                     backgroundColor: colors.priorityHigh + "20",
                                 }}
+                                variant="caption"
                             />
                         )}
                         {task.isOneTime && (
@@ -109,22 +110,28 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                                     backgroundColor:
                                         colors.prioritySevere + "20",
                                 }}
+                                variant="caption"
                             />
                         )}
                         {/*<Pill text={format(new Date(task.due_date), "d MMM")} />*/}
                         <Pill
                             text={task.priority}
                             style={{ backgroundColor: pillBg }}
+                            variant="caption"
                         />
                         {task.tags.map((label) => (
-                            <Pill key={label} text={label} />
+                            <Pill key={label} text={label} variant="caption" />
                         ))}
                         {viewAll &&
                             (task.days === "all" ? (
-                                <Pill text="every day" />
+                                <Pill text="every day" variant="caption" />
                             ) : (
                                 task.days.map((day, index) => (
-                                    <Pill key={index} text={day} />
+                                    <Pill
+                                        key={index}
+                                        text={day}
+                                        variant="caption"
+                                    />
                                 ))
                             ))}
                     </Flex>

@@ -72,7 +72,12 @@ export default function SecondHeader() {
             </Button>
             <Button
                 variant="icon"
-                style={[styles.button, { backgroundColor: primary + "20" }]}
+                style={[
+                    styles.button,
+                    {
+                        backgroundColor: primary + "20",
+                    },
+                ]}
                 onPress={jumpToTags}
             >
                 <MotiView {...FadeIn}>

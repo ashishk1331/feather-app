@@ -9,7 +9,11 @@ import { useTheme } from "@/hooks/useTheme";
 
 import { subsetTasksWithFilters } from "@/util/filterPresets";
 import { searchThroughTasks } from "@/util/searchUtil";
-import { sortTodayTasks, taskMutations } from "@/util/taskUtil";
+import {
+    groupTasksByTags,
+    sortTodayTasks,
+    taskMutations,
+} from "@/util/taskUtil";
 
 import { useConfigStore } from "@/store/Config";
 import { useTaskStore } from "@/store/TaskStore";
@@ -28,6 +32,8 @@ export default function Page() {
 
     const tasks = useTaskStore((state) => state.tasks);
     const todayTasks = sortTodayTasks(tasks);
+
+    groupTasksByTags(tasks);
 
     const tasksToDisplay = taskMutations(tasks, [
         // view archived or normal tasks

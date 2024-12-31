@@ -11,6 +11,7 @@ interface AppState {
     viewArchived: boolean;
     viewFilters: boolean;
     viewSearch: boolean;
+    viewTags: boolean;
     lastLoggedIn: string;
     appliedFilters: AvailableFilters[];
     search: string;
@@ -23,6 +24,7 @@ interface AppActions {
     toggleViewArchived(): void;
     toggleViewFilters(): void;
     toggleViewSearch(): void;
+    toggleViewTags(): void;
     resetAppliedFilters(): void;
     setLastLoggedIn(lastLoggedIn: string): void;
     setSearch(search: string): void;
@@ -55,6 +57,11 @@ export const useConfigStore = create<AppState & AppActions>()(
             search: "",
             setSearch(search) {
                 return set({ search });
+            },
+
+            viewTags: false,
+            toggleViewTags() {
+                return set((prev) => ({ viewTags: !prev.viewTags }));
             },
 
             viewFilters: false,

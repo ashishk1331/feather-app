@@ -1,20 +1,28 @@
-## todo
+# 🏃‍♂️ todo
 
-0. ✅ ~~statusbar color~~
-1. performance and scoped states for better rendering and re-rendering
-2. ✅ minification and tree-shaking of the code using esbuild
-3. tags and group based sorting
+1. group via labels
+2. label based filtering
+3. performance and scoped states for better rendering and re-rendering
 4. progress for each day and week
-5. edit feature and due dates
-6. notifications and reminders
-7. subtasks and checklists
-8. one-time tasks and recurring tasks
-9. group via labels
-10. search and filter
-11. themes and customizations
-12. charts and analytics
-13. anatical insights around tasks and habits
-14. ✅ refresh finished list when diff in last logged in and today
+5. charts and analytics
+6. Form validation and errors
+
+# 🤷‍♂️ "Good to have" stack
+
+1. subtasks and checklists
+2. notifications and reminders
+3. edit feature and due dates
+4. themes and customizations
+5. anatical insights around tasks and habits
+6. tags and group based sorting
+
+# 👏 Done Stack
+
+1. ✅ statusbar color
+2. ✅ search and filter
+3. ✅ minification and tree-shaking of the code using esbuild
+4. ✅ one-time tasks and recurring tasks
+5. ✅ refresh finished list when diff in last logged in and today
 
 ## Remember:
 

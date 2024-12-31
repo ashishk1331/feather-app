@@ -2,9 +2,17 @@ import { format } from "date-fns";
 import * as Crypto from "expo-crypto";
 
 import { DayNameType } from "@/types/days";
+import { Section } from "@/types/extra";
 import { type Task } from "@/types/task";
 
 import { HideArchived, applyFilterOn } from "./filterPresets";
+
+export function generateSection(label: string): Section {
+    return {
+        type: "section",
+        label,
+    };
+}
 
 export function generateTask(
     prompt: string,
@@ -66,4 +74,29 @@ export function findOneTimeFinishedTaskIds(finished: string[], tasks: Task[]) {
     return tasks
         .filter((task) => finished.includes(task.id) && task.isOneTime)
         .map((task) => task.id);
+}
+
+export function groupTasksByTags(tasks: Task[]): (Task | Section)[] {
+    const groupedTasks: Record<string, Task[]> = {};
+
+    for (const task of tasks) {
+        for (const individualTag of task.tags) {
+            if (individualTag in groupedTasks) {
+                groupedTasks[individualTag].push(task);
+            } else {
+                groupedTasks[individualTag] = [task];
+            }
+        }
+    }
+
+    const serializeIntoArray: (Task | Section)[] = [];
+    for (const [label, subtasks] of Object.entries(groupedTasks)) {
+        serializeIntoArray.push(generateSection(label));
+
+        for (const individualTask of subtasks) {
+            serializeIntoArray.push(individualTask);
+        }
+    }
+
+    return serializeIntoArray;
 }

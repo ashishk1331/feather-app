@@ -36,7 +36,7 @@ export default function SearchBar() {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 12,
+        marginVertical: 12,
     },
     headline: {
         marginLeft: 6,
