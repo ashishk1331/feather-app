@@ -26,6 +26,7 @@ export default function AddForm() {
     const prompt = useFormStore((state) => state.prompt);
     const setPrompt = useFormStore((state) => state.setPrompt);
     const resetForm = useFormStore((state) => state.reset);
+    const toggleError = useFormStore((state) => state.toggleError);
 
     const addTask = useTaskStore((state) => state.addTask);
 
@@ -38,19 +39,26 @@ export default function AddForm() {
 
     const handleSubmit = useCallback(
         function () {
-            try {
-                const {
-                    prompt,
-                    days,
-                    priority,
-                    tags,
-                    isAOneTimeTask: isOneTime,
-                } = useFormStore.getState();
-                addTask(generateTask(prompt, days, priority, tags, isOneTime));
-            } finally {
-                resetForm();
-                router.push("/");
+            const {
+                prompt,
+                days,
+                priority,
+                tags,
+                isAOneTimeTask: isOneTime,
+            } = useFormStore.getState();
+
+            if (prompt.trim().length === 0) {
+                return toggleError("prompt", "Don't leave prompt empty.");
             }
+
+            if (days.length === 0) {
+                return toggleError("days", "Select days for your task.");
+            }
+
+            addTask(generateTask(prompt, days, priority, tags, isOneTime));
+
+            resetForm();
+            router.push("/");
         },
         [resetForm, addTask],
     );

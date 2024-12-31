@@ -11,6 +11,7 @@ interface FormState {
     priority: Task["priority"];
     isAOneTimeTask: boolean;
     tags: string[];
+    errors: Record<string, string>;
 }
 
 interface FormActions {
@@ -20,6 +21,7 @@ interface FormActions {
     toggleOneTimeTask(): void;
     toggleTag(tag: string): void;
     reset(): void;
+    toggleError(target: string, message: string | undefined): void;
 }
 
 function checkOrAddDay<T extends DayNameType[], V extends DayNameType>(
@@ -59,6 +61,7 @@ const initialState: FormState = {
     priority: "low",
     isAOneTimeTask: false,
     tags: [],
+    errors: {},
 };
 
 export const useFormStore = create<FormState & FormActions>()((set) => ({
@@ -87,10 +90,20 @@ export const useFormStore = create<FormState & FormActions>()((set) => ({
     },
 
     reset() {
-        return set({ ...initialState, days: [] });
+        return set({ ...initialState, days: [], errors: {} });
     },
 
     toggleOneTimeTask() {
         return set((prev) => ({ isAOneTimeTask: !prev.isAOneTimeTask }));
+    },
+
+    toggleError(target, message) {
+        return set((prev) => {
+            if (message) {
+                prev.errors[target] = message;
+            }
+
+            return { errors: { ...prev.errors } };
+        });
     },
 }));

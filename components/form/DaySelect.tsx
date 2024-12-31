@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
+import AntDesign from "@expo/vector-icons/AntDesign";
+
 import { DayNames } from "@/constants/Days";
 
 import { useTheme } from "@/hooks/useTheme";
@@ -15,14 +17,20 @@ const firstRow = DayNames.slice(0, 4);
 const secondRow = DayNames.slice(4);
 
 export default function DaySelect() {
-    const { text: color } = useTheme();
-    const [days, toggleDay] = useFormStore(
-        useShallow((state) => [state.days, state.toggleDay]),
+    const { text: color, warning } = useTheme();
+    const [days, toggleDay, errors] = useFormStore(
+        useShallow((state) => [state.days, state.toggleDay, state.errors]),
     );
 
     return (
         <Flex gap={12}>
             <Text>days</Text>
+            {errors.days && (
+                <Flex flex={1} flexDirection="row" alignItems="center" gap={6}>
+                    <AntDesign name="warning" size={18} color={warning} />
+                    <Text style={{ color: warning }}>Select your days.</Text>
+                </Flex>
+            )}
             <Flex
                 flexDirection="row"
                 justifyContent="space-between"
