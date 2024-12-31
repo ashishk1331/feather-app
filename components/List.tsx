@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 
 import { Task } from "@/types/task";
 
@@ -13,7 +13,6 @@ type ListProps = {
 export default function List({ tasksToDisplay }: ListProps) {
     return (
         <FlatList
-            style={styles.outer}
             data={tasksToDisplay}
             renderItem={({ item, index }) => (
                 <TaskItem key={item.id} index={index} task={item} />
@@ -26,9 +25,3 @@ export default function List({ tasksToDisplay }: ListProps) {
         />
     );
 }
-
-const styles = StyleSheet.create({
-    outer: {
-        paddingTop: 12,
-    },
-});

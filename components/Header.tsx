@@ -4,13 +4,15 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
-import { useTheme } from "@/hooks/useTheme";
-import { useConfigStore } from "@/store/Config";
-import { useTaskStore } from "@/store/TaskStore";
-import { fetchNextHeadline } from "@/util/greeting";
-
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+
+import { useTheme } from "@/hooks/useTheme";
+
+import { fetchNextHeadline } from "@/util/greeting";
+
+import { useConfigStore } from "@/store/Config";
+import { useTaskStore } from "@/store/TaskStore";
 
 import Flex from "./layout/Flex";
 import FilterSelection from "./menu/FilterSelection";
@@ -52,7 +54,7 @@ export default function Header({ tasksToDisplayLength }: HeaderProps) {
     }
 
     useEffect(() => {
-        let timer: ReturnType<typeof setInterval>;
+        let timer: ReturnType<typeof setInterval> | null = null;
         timer = setInterval(() => {
             setHeadline(nextHeadline.next().value);
         }, 10 * 1000);

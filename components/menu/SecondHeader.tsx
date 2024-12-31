@@ -38,6 +38,10 @@ export default function SecondHeader() {
         router.push(Routes.TagsPage);
     }
 
+    function jumpToAnalytics() {
+        router.push(Routes.Analytics);
+    }
+
     return (
         <Flex
             flexDirection="row"
@@ -78,6 +82,7 @@ export default function SecondHeader() {
             <Button
                 variant="icon"
                 style={[styles.button, { backgroundColor: primary + "20" }]}
+                onPress={jumpToAnalytics}
             >
                 <MotiView {...FadeIn}>
                     <Octicons name="graph" size={24} color={primary} />

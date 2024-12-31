@@ -2,6 +2,8 @@ import { router, useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+
 import DaySelect from "@/components/form/DaySelect";
 import InputField from "@/components/form/InputField";
 import OneTimeCheckbox from "@/components/form/OneTimeCheckbox";
@@ -12,12 +14,15 @@ import Flex from "@/components/layout/Flex";
 import Button from "@/components/primitives/Button";
 import Text from "@/components/primitives/Text";
 
+import { useTheme } from "@/hooks/useTheme";
+
 import { generateTask } from "@/util/taskUtil";
 
 import { useFormStore } from "@/store/FormStore";
 import { useTaskStore } from "@/store/TaskStore";
 
 export default function AddForm() {
+    const { primary } = useTheme();
     const prompt = useFormStore((state) => state.prompt);
     const setPrompt = useFormStore((state) => state.setPrompt);
     const resetForm = useFormStore((state) => state.reset);
@@ -31,21 +36,24 @@ export default function AddForm() {
         }, []),
     );
 
-    const handleSubmit = useCallback(function () {
-        try {
-            const {
-                prompt,
-                days,
-                priority,
-                tags,
-                isAOneTimeTask: isOneTime,
-            } = useFormStore.getState();
-            addTask(generateTask(prompt, days, priority, tags, isOneTime));
-        } finally {
-            resetForm();
-            router.push("/");
-        }
-    }, []);
+    const handleSubmit = useCallback(
+        function () {
+            try {
+                const {
+                    prompt,
+                    days,
+                    priority,
+                    tags,
+                    isAOneTimeTask: isOneTime,
+                } = useFormStore.getState();
+                addTask(generateTask(prompt, days, priority, tags, isOneTime));
+            } finally {
+                resetForm();
+                router.push("/");
+            }
+        },
+        [resetForm, addTask],
+    );
 
     function goBack() {
         router.back();
@@ -60,9 +68,16 @@ export default function AddForm() {
                     gap={32}
                     style={styles.outerPadding}
                 >
-                    <Text variant="title" style={{ marginTop: 12 }}>
-                        Add a task
-                    </Text>
+                    <Flex
+                        flexDirection="row"
+                        alignItems="baseline"
+                        justifyContent="flex-start"
+                        style={styles.header}
+                        gap={12}
+                    >
+                        <FontAwesome name="circle" size={24} color={primary} />
+                        <Text variant="title">Add a task</Text>
+                    </Flex>
                     <InputField
                         value={prompt}
                         onChangeText={setPrompt}
@@ -78,6 +93,7 @@ export default function AddForm() {
                         flex={1}
                         flexDirection="row"
                         justifyContent="space-between"
+                        style={styles.buttonFooter}
                     >
                         <Button
                             variant="outline"
@@ -102,6 +118,13 @@ const styles = StyleSheet.create({
     outerPadding: {
         paddingHorizontal: 6,
         paddingBottom: 48,
+    },
+    header: {
+        marginVertical: 18,
+        paddingHorizontal: 6,
+    },
+    buttonFooter: {
+        marginTop: 18,
     },
     button: {
         width: "48%",

@@ -34,7 +34,7 @@ export default function Tags() {
                         gap={12}
                     >
                         <FontAwesome name="circle" size={24} color={primary} />
-                        <Text variant="title">Manage Tags</Text>
+                        <Text variant="title">Analytics</Text>
                     </Flex>
                     <Flex
                         flex={1}
