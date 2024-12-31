@@ -23,8 +23,6 @@ import { useTaskStore } from "@/store/TaskStore";
 
 export default function AddForm() {
     const { primary } = useTheme();
-    const prompt = useFormStore((state) => state.prompt);
-    const setPrompt = useFormStore((state) => state.setPrompt);
     const resetForm = useFormStore((state) => state.reset);
     const toggleError = useFormStore((state) => state.toggleError);
 
@@ -86,13 +84,7 @@ export default function AddForm() {
                         <FontAwesome name="circle" size={24} color={primary} />
                         <Text variant="title">Add a task</Text>
                     </Flex>
-                    <InputField
-                        value={prompt}
-                        onChangeText={setPrompt}
-                        label="prompt"
-                        placeholder="type here..."
-                        followup="Use @ to highlight words."
-                    />
+                    <InputField />
                     <DaySelect />
                     <PrioritySelection />
                     <TagsSelection />

@@ -1,4 +1,5 @@
 import { StyleSheet, TextInput } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 
@@ -9,26 +10,15 @@ import { useFormStore } from "@/store/FormStore";
 import Flex from "../layout/Flex";
 import Text from "../primitives/Text";
 
-type InputFieldProps = {
-    value: string;
-    onChangeText(prompt: string): void;
-    label?: string;
-    placeholder?: string;
-    followup?: string;
-};
-
-export default function InputField({
-    value,
-    onChangeText,
-    label,
-    placeholder = "",
-    followup = "",
-}: InputFieldProps) {
+export default function InputField() {
     const { text: color, warning } = useTheme();
-    const errors = useFormStore((state) => state.errors);
+    const [prompt, setPrompt, errors] = useFormStore(
+        useShallow((state) => [state.prompt, state.setPrompt, state.errors]),
+    );
+
     return (
         <Flex flex={1} flexDirection="column" gap={10}>
-            {label && <Text>{label}</Text>}
+            <Text>prompt</Text>
             {errors.prompt && (
                 <Flex flex={1} flexDirection="row" alignItems="center" gap={6}>
                     <AntDesign name="warning" size={18} color={warning} />
@@ -38,16 +28,14 @@ export default function InputField({
             <TextInput
                 cursorColor={color}
                 style={[styles.inputbox, { borderColor: color + "20", color }]}
-                value={value}
-                onChangeText={onChangeText}
-                placeholder={placeholder}
+                value={prompt}
+                onChangeText={setPrompt}
+                placeholder="type here..."
                 placeholderTextColor={color + "88"}
             />
-            {followup && (
-                <Text style={{ color: color + "88" }} variant="caption">
-                    {followup}
-                </Text>
-            )}
+            <Text style={{ color: color + "88" }} variant="caption">
+                Use @ to highlight words.
+            </Text>
         </Flex>
     );
 }
