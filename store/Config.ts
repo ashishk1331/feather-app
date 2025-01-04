@@ -16,6 +16,7 @@ interface AppState {
     appliedFilters: AvailableFilters[];
     search: string;
     tags: string[];
+    history: Record<string, string[]>;
 }
 
 interface AppActions {
@@ -29,6 +30,7 @@ interface AppActions {
     setLastLoggedIn(lastLoggedIn: string): void;
     setSearch(search: string): void;
     toggleFilter(filterName: AvailableFilters): void;
+    addToHistory(day: string, taskId: string): void;
 }
 
 export const useConfigStore = create<AppState & AppActions>()(
@@ -98,6 +100,23 @@ export const useConfigStore = create<AppState & AppActions>()(
                     viewSearch: !prev.viewSearch,
                     viewFilters: false,
                 }));
+            },
+
+            history: {},
+            addToHistory(day, taskId) {
+                return set((prev) => {
+                    if (!Object.hasOwn(prev, "history")) {
+                        prev.history[day] = [];
+                    }
+
+                    if (!prev.history[day].includes(taskId)) {
+                        prev.history[day].push(taskId);
+                    }
+
+                    return {
+                        history: prev.history,
+                    };
+                });
             },
 
             tags: ["lovely", "handsome", "fire"],

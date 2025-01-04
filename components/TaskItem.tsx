@@ -49,7 +49,7 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                     styles.box,
                     {
                         borderColor: isSelected
-                            ? colors.primary + "44"
+                            ? colors.primary + "88"
                             : colors.icon + "20",
                         backgroundColor: isSelected
                             ? colors.primary + "05"
@@ -69,7 +69,7 @@ export default function TaskItem({ index = 0, task }: TaskItemProps) {
                     />
                 )}
                 <Flex
-                    style={{ width: viewAll ? "84%" : "60%" }}
+                    style={{ width: viewAll ? "88%" : "60%" }}
                     flexDirection="column"
                     alignItems="flex-start"
                     gap={8}

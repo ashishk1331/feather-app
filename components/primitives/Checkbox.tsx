@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet } from "react-native";
 
-import { useTheme } from "@/hooks/useTheme";
-
 import AntDesign from "@expo/vector-icons/AntDesign";
+
+import { useTheme } from "@/hooks/useTheme";
 
 type CheckboxProps = {
     id: string;
@@ -38,8 +38,8 @@ export default function Checkbox({
 
 const styles = StyleSheet.create({
     checkbox: {
-        width: 28,
-        height: 28,
+        width: 32,
+        height: 32,
         borderWidth: 2,
         borderRadius: 4,
         marginHorizontal: 6,

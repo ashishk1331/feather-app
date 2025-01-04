@@ -80,10 +80,12 @@ export default function FilterSelection() {
                                                                   label,
                                                               )) as keyof typeof colors
                                                       ] + "88"
-                                                    : colors.primary,
+                                                    : colors.primary + "88",
                                             backgroundColor:
                                                 appliedFilters.includes(label)
-                                                    ? (priorties.includes(label)
+                                                    ? (priorties.includes(
+                                                          label as Priority,
+                                                      )
                                                           ? colors[
                                                                 ("priority" +
                                                                     captilize(

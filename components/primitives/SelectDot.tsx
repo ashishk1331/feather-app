@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { useTheme } from "@/hooks/useTheme";
+
 import { useTaskStore } from "@/store/TaskStore";
 
 type SelectDotProps = {
@@ -28,7 +29,7 @@ export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
 
     return (
         <Pressable
-            style={[isSelected ? styles.lesspadding : styles.morepadding]}
+            style={styles.outer}
             onPress={() => toggleSelectedStatus(id)}
         >
             <View
@@ -45,23 +46,17 @@ export default function SelectDot({ id, isSelected = false }: SelectDotProps) {
 }
 
 const styles = StyleSheet.create({
-    lesspadding: {
-        padding: 9,
-    },
-    morepadding: {
+    outer: {
         padding: 12,
     },
     checkbox: {
-        marginHorizontal: 6,
-    },
-    selected: {
-        width: 12,
-        height: 12,
-        borderRadius: 12,
-    },
-    deselected: {
         width: 6,
         height: 6,
+        marginHorizontal: 6,
         borderRadius: 6,
     },
+    selected: {
+        transform: [{ scale: 2.4 }],
+    },
+    deselected: {},
 });

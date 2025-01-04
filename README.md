@@ -2,9 +2,8 @@
 
 1. group via labels
 2. label based filtering
-3. performance and scoped states for better rendering and re-rendering
-4. progress for each day and week
-5. charts and analytics
+3. [wip] progress for each day and week
+4. charts and analytics
 
 # 🤷‍♂️ "Good to have" stack
 
@@ -18,11 +17,12 @@
 # 👏 Done Stack
 
 1. ✅ statusbar color
-2. ✅ Form validation and errors
-3. ✅ search and filter
-4. ✅ minification and tree-shaking of the code using esbuild
-5. ✅ one-time tasks and recurring tasks
-6. ✅ refresh finished list when diff in last logged in and today
+2. ✅ performance and scoped states for better rendering and re-rendering
+3. ✅ Form validation and errors
+4. ✅ search and filter
+5. ✅ minification and tree-shaking of the code using esbuild
+6. ✅ one-time tasks and recurring tasks
+7. ✅ refresh finished list when diff in last logged in and today
 
 ## Remember:
 
