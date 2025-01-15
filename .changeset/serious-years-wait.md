@@ -5,6 +5,7 @@
 tags, filter and search
 
 1. Tags available for tasks
+2. Weekly reports at analytics page
 
 - bug fixes
 

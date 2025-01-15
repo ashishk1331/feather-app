@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 import dummyTasks from "@/assets/tasks.json";
+
 import { Task } from "@/types/task";
 
 import { customStorage } from "./PersistWrapper";
@@ -43,7 +44,7 @@ export const useTaskStore = create<TaskState>()(
             },
         }),
         {
-            name: "task-storage",
+            name: "feather-task-storage",
             storage: createJSONStorage(() => customStorage),
             partialize: ({ tasks, finished, trash }) => ({
                 tasks,

@@ -1,13 +1,15 @@
 import { differenceInCalendarDays } from "date-fns";
 import { Stack } from "expo-router/stack";
 import { setStatusBarStyle } from "expo-status-bar";
+import * as R from "ramda";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 
-import { useConfigStore } from "@/store/Config";
-import { useFormStore } from "@/store/FormStore";
-import { useTaskStore } from "@/store/TaskStore";
 import { findOneTimeFinishedTaskIds } from "@/util/taskUtil";
+
+import { useAnalyticsStore } from "@/store/AnalyticsStore";
+import { useConfigStore } from "@/store/Config";
+import { useTaskStore } from "@/store/TaskStore";
 
 // close selected tasks on view change
 // and viewArchived option as well
@@ -21,12 +23,24 @@ useConfigStore.subscribe((cur, prev) => {
     }
 
     if (cur.viewSearch !== prev.viewSearch) {
-        useFormStore.setState({ search: "" });
+        useConfigStore.setState({ search: "" });
     }
 });
 
-// move deleted tasks to trash
 useTaskStore.subscribe((cur, prev) => {
+    // 1. put finished tasks for analytics
+    if (cur.finished.length !== prev.finished.length) {
+        // const insideAnalyticsFinished = useAnalyticsStore.getState().finished;
+        let today = new Date().toJSON();
+        today = today.substring(0, today.indexOf("T"));
+
+        // all newly finished tasks + marked unfinished tasks
+        for (const id of R.symmetricDifference(cur.finished, prev.finished)) {
+            useAnalyticsStore.getState().toggleTaskFromFinished(id, today);
+        }
+    }
+
+    // 2. move deleted tasks to trash
     if (cur.tasks.length !== prev.tasks.length) {
         const curIDs = cur.tasks.map((task) => task.id);
 
@@ -70,7 +84,7 @@ export default function HomeLayout() {
         // useConfigStore.setState({
         //     lastLoggedIn: new Date(2014, 2, 3).toJSON(),
         // });
-    }, []);
+    }, [lastLoggedIn]);
 
     return (
         <Stack>

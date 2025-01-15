@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
+import WeeklyReport from "@/components/analytics/WeeklyReport";
 import Container from "@/components/layout/Container";
 import Flex from "@/components/layout/Flex";
 import Button from "@/components/primitives/Button";
@@ -36,6 +37,7 @@ export default function Tags() {
                         <FontAwesome name="circle" size={24} color={primary} />
                         <Text variant="title">Analytics</Text>
                     </Flex>
+                    <WeeklyReport />
                     <Flex
                         flex={1}
                         flexDirection="row"
