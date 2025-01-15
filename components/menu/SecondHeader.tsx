@@ -5,7 +5,8 @@ import { useShallow } from "zustand/react/shallow";
 
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Octicons from "@expo/vector-icons/Octicons";
+
+// import Octicons from "@expo/vector-icons/Octicons";
 
 import { FadeIn } from "@/constants/Animate";
 import { Routes } from "@/constants/Routes";
@@ -38,9 +39,9 @@ export default function SecondHeader() {
         router.push(Routes.TagsPage);
     }
 
-    function jumpToAnalytics() {
-        router.push(Routes.Analytics);
-    }
+    // function jumpToAnalytics() {
+    //     router.push(Routes.Analytics);
+    // }
 
     return (
         <Flex
@@ -84,7 +85,7 @@ export default function SecondHeader() {
                     <Feather name="tag" size={24} color={primary} />
                 </MotiView>
             </Button>
-            <Button
+            {/*<Button
                 variant="icon"
                 style={[styles.button, { backgroundColor: primary + "20" }]}
                 onPress={jumpToAnalytics}
@@ -92,7 +93,7 @@ export default function SecondHeader() {
                 <MotiView {...FadeIn}>
                     <Octicons name="graph" size={24} color={primary} />
                 </MotiView>
-            </Button>
+            </Button>*/}
             <Button
                 variant="icon"
                 style={[
